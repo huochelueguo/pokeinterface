@@ -1,0 +1,12 @@
+poke接口自动化框架 python+pytest+requests+allure
+config:配置封装
+    config.yaml:配置文件
+    reconfig.py:读取配置文件
+commom:工具类封装
+    GetYaml:读取数据
+    RequestPost:封装post方法
+    RequestGet:封装get方法
+conftest.py:初始化文件
+pytest.py:配置文件
+
+

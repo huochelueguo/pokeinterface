@@ -1,0 +1,17 @@
+tests:
+  - desc: '正确的密码'
+    http:
+      path: '/api/user/login'
+      headers: ''
+      body: {platform: 4, token: login, id_token: '+8618515588536', secret: '111111'}
+    expected:
+      code: 200
+      err_msg: 'success'
+  - desc: '正确的密码2'
+    http:
+      path: '/api/user/login'
+      headers: ''
+      body: {platform: 4, token: login, id_token: '+8618515588536', secret: '111111'}
+    expected:
+      code: 200
+      err_msg: 'success'

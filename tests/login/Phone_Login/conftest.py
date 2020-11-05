@@ -1,0 +1,39 @@
+# !usr/bin/env python
+# -*- coding:utf-8 _*-
+"""
+@Author:孙泽
+@Github:https://github.com/huochelueguo
+@File:conftest.py
+@Time:2020/9/23 下午11:21
+"""
+import pytest
+import os
+
+from commom.GetYaml import GetData
+
+
+def pytest_generate_tests(metafunc):
+    dir_path = os.path.split(__file__)
+    if 'empty_login' in metafunc.fixturenames:
+        # 读取数据的路径
+        data_path = os.path.join(dir_path[0], 'test_empty_phone')
+        if metafunc.config.getoption('--envi') == 'debug':
+            test_data = GetData(path=data_path, envi='debug').get_data()
+            metafunc.parametrize('empty_login', test_data[1], ids=test_data[0])
+        elif metafunc.config.getoption('--envi') == 'online':
+            test_data = GetData(path=data_path, envi='online').get_data()
+            metafunc.parametrize('empty_login', test_data[1], ids=test_data[0])
+    if 'right_login' in metafunc.fixturenames:
+        data_path = os.path.join(dir_path[0] , 'test_right_phone')
+        if metafunc.config.getoption('--envi') == 'debug':
+            test_data = GetData(path=data_path, envi='debug').get_data()
+            metafunc.parametrize('right_login', test_data[1], ids=test_data[0])
+        elif metafunc.config.getoption('--envi') == 'online':
+            test_data = GetData(path=data_path, envi='online').get_data()
+            metafunc.parametrize('right_login', test_data[1], ids=test_data[0])
+
+
+
+
+
+

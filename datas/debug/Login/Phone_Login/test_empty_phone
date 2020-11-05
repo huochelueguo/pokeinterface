@@ -1,0 +1,9 @@
+tests:
+  - desc: '错误的密码'
+    http:
+      path: '/api/user/login'
+      headers: ''
+      body: {platform: 4, token: login, id_token: '', secret: '111111'}
+    expected:
+      code: '500'
+      err_msg: 'code=400, message=err: bad login parameters'

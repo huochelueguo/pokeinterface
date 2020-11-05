@@ -1,0 +1,17 @@
+tests:
+  - desc: '正确的密码'
+    http:
+      path: '/api/user/Login'
+      headers: ''
+      body: {platform: 4, token: Login, id_token: '+8618500616906', secret: 234567}
+    expected:
+      code: 200
+      response: 'poke_session_id'
+  - desc: '正确的密码222'
+    http:
+      path: '/api/user/Login'
+      headers: ''
+      body: {platform: 4, token: Login, id_token: '+8618500616906', secret: 234567}
+    expected:
+      code: 200
+      response: 'poke_session_id'

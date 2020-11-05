@@ -1,0 +1,20 @@
+# 测试数据格式：
+tests:
+  - desc: '用例描述'
+    http:
+      method: 'get / post'
+      path: '接口url'
+      headers: '用例请求头数据'
+      body: '用例请求体数据'
+    expected:
+      code: '返回相应码'
+      res: '期望返回数据'
+  - desc2: '下一条用例'
+    http:
+      method: 'get / post'
+      path: '接口url'
+      headers: '用例请求头数据'
+      body: '用例请求体数据'
+    expected:
+      code: '返回相应码'
+      res: '期望返回数据'
