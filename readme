@@ -8,5 +8,10 @@ commom:工具类封装
     RequestGet:封装get方法
 conftest.py:初始化文件
 pytest.ini:配置文件
-
+report:allure图形化报告文件位置（不需要上传git）
+tests:测试case
+    conftest.py:  用于根据主目录中的conftest读取环境配置，通过配置读取对应的测试数据，用户参数化
+datas: 测试数据
+    debug: 测试环境
+    online: 线上环境
 
