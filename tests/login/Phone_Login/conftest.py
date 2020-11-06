@@ -13,10 +13,12 @@ from commom.GetYaml import GetData
 
 
 def pytest_generate_tests(metafunc):
+    # 当前工作目录路径
     dir_path = os.path.split(__file__)
     if 'empty_login' in metafunc.fixturenames:
         # 读取数据的路径
         data_path = os.path.join(dir_path[0], 'test_empty_phone')
+        # 判断环境，获取不同环境数据
         if metafunc.config.getoption('--envi') == 'debug':
             test_data = GetData(path=data_path, envi='debug').get_data()
             metafunc.parametrize('empty_login', test_data[1], ids=test_data[0])
@@ -31,6 +33,15 @@ def pytest_generate_tests(metafunc):
         elif metafunc.config.getoption('--envi') == 'online':
             test_data = GetData(path=data_path, envi='online').get_data()
             metafunc.parametrize('right_login', test_data[1], ids=test_data[0])
+    if 'empty_password' in metafunc.fixturenames:
+        data_path = os.path.join(dir_path[0], 'test_empty_password')
+        if metafunc.config.getoption('--envi') == 'debug':
+            test_data = GetData(path=data_path, envi='debug').get_data()
+            metafunc.parametrize('empty_password', test_data[1], ids=test_data[0])
+        if metafunc.config.getoption('--envi') == 'online':
+            test_data = GetData(path=data_path, envi='online').get_data()
+            metafunc.paramerrize('empty_password', test_data[0], ids=test_data[1])
+
 
 
 

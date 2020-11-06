@@ -7,6 +7,6 @@ commom:工具类封装
     RequestPost:封装post方法
     RequestGet:封装get方法
 conftest.py:初始化文件
-pytest.py:配置文件
+pytest.ini:配置文件
 
 

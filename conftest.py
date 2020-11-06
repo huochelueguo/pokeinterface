@@ -7,6 +7,8 @@
 @Time:2020/8/12 上午9:12
 """
 import os
+import sys
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 import pytest
 
