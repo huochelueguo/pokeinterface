@@ -15,3 +15,9 @@ datas: 测试数据
     debug: 测试环境
     online: 线上环境
 
+
+1.完成日志相关配置
+2.完成allure配置
+3.搭建接口依赖的case,完成获取token的公共接口
+4.后续接入email jekins
+

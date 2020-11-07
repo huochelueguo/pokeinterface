@@ -7,7 +7,7 @@
 @Time:NAME.py@Time:2020/11/6 16:19
 """
 # 密码为空时请求数据
-
+import allure
 import pytest
 
 from commom.RequestPost import Post
@@ -15,8 +15,13 @@ from commom.RequestPost import Post
 
 class Test_Password(object):
 
+    @allure.feature('手机号码登录')
+    @allure.story('手机号码+空的密码')
+    @allure.severity('critical')
     def test_empty_password(self, get_config, empty_password):
-
+        """
+        用例描述：使用正确的手机号码和空的密码登录
+        """
         test_url = get_config[0] + empty_password[1].get('path')
         test_body = empty_password[1].get('body')
         test_header = empty_password[1].get('headers')
