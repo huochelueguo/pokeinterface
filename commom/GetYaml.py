@@ -82,7 +82,9 @@ class GetData(object):
 
 
 if __name__ == '__main__':
-    path = '/Users/sunwenxiao/PycharmProjects/poketinterface/tests/Login/Phone_Login/test_right_phone.py'
+    # mac
+    # path = '/Users/sunwenxiao/PycharmProjects/poketinterface/tests/Login/Phone_Login/test_right_phone.py'
+    path = 'E:/pokeinterface/tests/login/Phone_Login/test_right_phone.py'
     a = GetData(path, envi='debug').get_test_data()
     print(a)
     print(type(a))

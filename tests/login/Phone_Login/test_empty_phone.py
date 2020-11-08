@@ -7,7 +7,7 @@
 @Time:2020/9/7 上午9:48
 @手机号为空时发送请求
 """
-
+import allure
 import pytest
 
 from commom.RequestPost import Post
@@ -19,7 +19,13 @@ class Test_Empty(object):
 
     """
 
+    @allure.feature('手机号码登录')
+    @allure.story('空手机号码+正确的密码')
+    @allure.severity('critical')
     def test_empty_phone(self, empty_login, get_config):
+        """
+        用例描述：使用空的手机号码+非空密码登录
+        """
         test_url = get_config[0] + empty_login[1].get('path')
         test_header = empty_login[1].get('headers')
         test_body = empty_login[1].get('body')
