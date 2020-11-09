@@ -6,6 +6,7 @@ commom:工具类封装
     GetYaml:读取数据
     RequestPost:封装post方法
     RequestGet:封装get方法
+    Logs:封装日志读取类
 conftest.py:初始化文件
 pytest.ini:配置文件
 report:allure图形化报告文件位置（不需要上传git）
