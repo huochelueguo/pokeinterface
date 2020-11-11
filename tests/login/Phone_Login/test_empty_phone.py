@@ -7,11 +7,17 @@
 @Time:2020/9/7 上午9:48
 @手机号为空时发送请求
 """
+import sys
+
 import allure
 import pytest
 
+from commom.Logs import Log
 from commom.RequestPost import Post
 
+
+log = Log(__name__)
+logger = log.Logger
 
 
 class Test_Empty(object):
@@ -26,6 +32,8 @@ class Test_Empty(object):
         """
         用例描述：使用空的手机号码+非空密码登录
         """
+        def_name = sys._getframe().f_code.co_name
+        logger.info("开始执行脚本%s:\n", def_name)
         test_url = get_config[0] + empty_login[1].get('path')
         test_header = empty_login[1].get('headers')
         test_body = empty_login[1].get('body')
@@ -34,5 +42,6 @@ class Test_Empty(object):
         # print(res)
         # print(res_code)
         # print(empty_login[2].get('code'))
+        logger.info(f'进行数据对比{def_name}\n')
         assert 500 == res_code
         assert empty_login[2].get('err_msg') == res.get('err_msg')

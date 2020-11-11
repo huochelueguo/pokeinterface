@@ -7,10 +7,18 @@
 @Time:NAME.py@Time:2020/11/6 16:19
 """
 # 密码为空时请求数据
+import sys
+
 import allure
 import pytest
 
+from commom.Logs import Log
 from commom.RequestPost import Post
+
+
+# 调用日志模块
+log = Log(__name__)
+logger = log.Logger
 
 
 class Test_Password(object):
@@ -22,10 +30,13 @@ class Test_Password(object):
         """
         用例描述：使用正确的手机号码和空的密码登录
         """
+        def_name = sys._getframe().f_code.co_name
+        logger.info("开始执行脚本%s:\n", def_name)
         test_url = get_config[0] + empty_password[1].get('path')
         test_body = empty_password[1].get('body')
         test_header = empty_password[1].get('headers')
         res = Post(url=test_url, header=test_header, body=test_body).post_request()[0]
+        logger.info(f'进行数据对比{def_name}\n')
         assert empty_password[2].get('code') == res.get('error_code')
         assert empty_password[2].get('err_msg') == res.get('err_msg')
 

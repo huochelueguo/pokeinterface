@@ -51,7 +51,7 @@ class Log(object):
     def __set_formatter(self, stream_handler, file_handler):
         """设置日志输出格式"""
         formatter = logging.Formatter('%(asctime)s-%(name)s-%(filename)s-[line:%(lineno)d]'
-                                      '-%(levelname)s-[日志信息]: %(message)s',
+                                      '-%(levelname)s: %(message)s',
                                       datefmt='%Y-%m-%d %H:%M:%S')
         stream_handler.setFormatter(formatter)
         file_handler.setFormatter(formatter)
