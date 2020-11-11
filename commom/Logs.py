@@ -13,7 +13,10 @@ import time
 
 def create_file():
     """ 按照日期创建日志文件"""
-    log_dir = os.path.dirname(os.getcwd()) + '/logs/'
+    path = os.path.split(__file__)
+    print(path[0])
+    log_dir = path[0].replace('/commom', '/logs/')
+    print(log_dir)
     if not os.path.exists(log_dir):
         os.mkdir(log_dir)
     else:
@@ -71,6 +74,7 @@ class Log(object):
 if __name__ == '__main__':
     log = Log(__name__)
     logger = log.Logger
+    print(__name__)
     logger.debug('I am a debug message')
     logger.info('I am a info message')
     logger.warning('I am a warning message')

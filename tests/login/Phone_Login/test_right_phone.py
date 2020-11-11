@@ -15,11 +15,8 @@ import pytest
 from commom.RequestPost import Post
 from commom.Logs import Log
 
-
-# file = os.path.dirname()
-file = 'logs'
-print(file)
-log = Log(file)
+# 调用日志模块
+log = Log(__name__)
 logger = log.Logger
 
 
@@ -37,13 +34,15 @@ class Test_Login(object):
         test_url = get_config[0] + right_login[1].get('path')
         test_header = right_login[1].get('headers')
         test_body = right_login[1].get('body')
-        logger.info("开始执行脚本%s:\n")
+        def_name = sys._getframe().f_code.co_name
+        logger.info("开始执行脚本%s:\n", def_name)
         res = Post(url=test_url, header=test_header, body=test_body).post_request()[0]
         res_code = Post(url=test_url, header=test_header, body=test_body).post_request()[1]
         test_body = right_login[1].get('body')
         print(right_login[0])
         print(right_login[1])
         print(right_login[2])
+        logger.info(f'进行数据对比{def_name}\n')
         assert right_login[2].get('code') == res_code
         assert right_login[2].get('err_msg') == res.get('err_msg')
 
