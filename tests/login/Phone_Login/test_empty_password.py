@@ -31,7 +31,7 @@ class Test_Password(object):
         用例描述：使用正确的手机号码和空的密码登录
         """
         def_name = sys._getframe().f_code.co_name
-        logger.info("开始执行脚本%s:\n", def_name)
+        logger.info("开始执行脚本%s:", def_name)
         test_url = get_config[0] + empty_password[1].get('path')
         test_body = empty_password[1].get('body')
         test_header = empty_password[1].get('headers')

@@ -35,16 +35,16 @@ class Test_Login(object):
         test_header = right_login[1].get('headers')
         test_body = right_login[1].get('body')
         def_name = sys._getframe().f_code.co_name
-        logger.info("开始执行脚本%s:\n", def_name)
-        res = Post(url=test_url, header=test_header, body=test_body).post_request()[0]
-        res_code = Post(url=test_url, header=test_header, body=test_body).post_request()[1]
-        test_body = right_login[1].get('body')
-        print(right_login[0])
-        print(right_login[1])
-        print(right_login[2])
+        logger.info("开始执行脚本%s:", def_name)
+        res = Post(url=test_url, header=test_header, body=test_body).post_request()
+        res_data = res[0]
+        res_code = res[1]
+        # print(res[0])
+        # print(res[1])
+        # print(right_login[2])
         logger.info(f'进行数据对比{def_name}\n')
         assert right_login[2].get('code') == res_code
-        assert right_login[2].get('err_msg') == res.get('err_msg')
+        assert right_login[2].get('err_msg') == res_data.get('err_msg')
 
 
 
