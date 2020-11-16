@@ -9,16 +9,34 @@
 # 封装获取token，返回token
 
 import requests
+import json
 
 from commom.RequestPost import Post
 
 
 class ReturnToken(Post):
 
-    def __init__(self, url, header, body):
+    def __init__(self, url, body, header):
+        # 调用父类构造方法
         super().__init__(url, body, header)
 
-
     # 重写父类的post_request方法，仅返回token即可
-    def get_token(self):
-        res = requests.post(url=self.url)
+    def post_request(self):
+        res = super().post_request()
+        res_dict = res[0]
+        res_token = res_dict.get('data').get('poke_session_id')
+        # print(type(res_dict))
+        return res_token
+
+
+if __name__ == '__main__':
+    header = ''
+    datas = {'platform': 4,
+                'token': 'login',
+                'id_token': '+8618515588536',
+                'secret': '111111'}
+    url1 = 'http://test.api.pokekara.com/api/user/login'
+    url2 = ''
+    datas2 = ''
+    a = ReturnToken(url=url1, body=datas, header=header).post_request()
+    print(a)
