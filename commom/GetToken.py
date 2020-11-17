@@ -8,10 +8,13 @@
 """
 # 封装获取token，返回token
 
-import requests
-import json
-
 from commom.RequestPost import Post
+
+from commom.Logs import Log
+
+# 调用日志模块
+log = Log(__name__)
+logger = log.Logger
 
 
 class ReturnToken(Post):
@@ -25,6 +28,7 @@ class ReturnToken(Post):
         res = super().post_request()
         res_dict = res[0]
         res_token = res_dict.get('data').get('poke_session_id')
+        logger.info('获取token')
         # print(type(res_dict))
         return res_token
 
