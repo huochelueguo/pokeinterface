@@ -10,12 +10,13 @@ import os
 import logging
 import time
 
+from commom.GetPath import Right_Path
+
 
 def create_file():
     """ 按照日期创建日志文件"""
-    path = os.path.split(__file__)
-    print(path[0])
-    log_dir = path[0].replace('/commom', '/logs/')
+    root_path = Right_Path().root_path()
+    log_dir = os.path.join(root_path, 'logs/')
     print(log_dir)
     if not os.path.exists(log_dir):
         os.mkdir(log_dir)
