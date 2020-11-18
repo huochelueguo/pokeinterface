@@ -9,26 +9,36 @@
 # 封装get方法
 
 import requests
+from commom.Logs import Log
+
+# 调用日志模块
+log = Log(__name__)
+logger = log.Logger
 
 
 class Get(object):
 
-    """
-    封装get方法
-    """
-
-    def __init__(self, url):
+    def __init__(self, url, params=None):
+        """
+        :param url:
+        :param params:
+        """
         self.url = url
+        self.params = params
 
-    def get_request(self):
+    def get_request(self, **kwargs):
         try:
             if self.url == '':
                 print('传入内容为空，请检查')
+                logger.error('传入地址为空，请检查')
             else:
-                response = requests.get(url=self.url)
+                response = requests.get(url=self.url, params=self.params, **kwargs)
                 return response.json()
+        except TimeoutError:
+            logger.error('网络连接超时')
         except Exception as result:
             print(result)
+            logger.error(f'{result}')
 
 
 if __name__ == '__main__':

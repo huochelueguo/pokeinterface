@@ -19,17 +19,21 @@ logger = log.Logger
 
 class ReturnToken(Post):
 
-    def __init__(self, url, body, header):
-        # 调用父类构造方法
-        super().__init__(url, body, header)
+    def __init__(self, url, header, data=None, json=None):
+        """调用父类构造方法"""
+        super().__init__(url, header, data, json)
+        self.url = url
+        self.header = header
+        self.data = data
+        self.json = json
 
-    # 重写父类的post_request方法，仅返回token即可
-    def post_request(self):
+    def post_request(self, kwargs=None):
+        """重写父类的post_request方法，仅返回token即可"""
         res = super().post_request()
         res_dict = res[0]
         res_token = res_dict.get('data').get('poke_session_id')
         logger.info('获取token')
-        # print(type(res_dict))
+        print(type(res))
         return res_token
 
 
@@ -42,5 +46,5 @@ if __name__ == '__main__':
     url1 = 'http://test.api.pokekara.com/api/user/login'
     url2 = ''
     datas2 = ''
-    a = ReturnToken(url=url1, body=datas, header=header).post_request()
+    a = ReturnToken(url=url1, json=datas, header=header).post_request()
     print(a)

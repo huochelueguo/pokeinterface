@@ -19,14 +19,14 @@ from config.ReadConfig import ReadConfig
 # 获取环境配置
 @pytest.fixture(scope='session', autouse=True)
 def get_config(request):
-    global url
+    global URL
     # envi = 'debug'
     envi = request.config.getoption('--envi')
     try:
-        url = ReadConfig().get_envi(env=envi)
+        URL = ReadConfig().get_envi(env=envi)
     except Exception as result:
         print(result)
-    yield url, envi
+    yield URL, envi
 
 
 def pytest_addoption(parser):

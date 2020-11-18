@@ -10,6 +10,11 @@ import pytest
 import os
 
 from commom.GetYaml import GetData
+from commom.Logs import Log
+
+# 调用日志模块
+log = Log(__name__)
+logger = log.Logger
 
 
 def pytest_generate_tests(metafunc):
@@ -22,25 +27,31 @@ def pytest_generate_tests(metafunc):
         if metafunc.config.getoption('--envi') == 'debug':
             test_data = GetData(path=data_path, envi='debug').get_data()
             metafunc.parametrize('empty_login', test_data[1], ids=test_data[0])
+            logger.info('返回参数化数据')
         elif metafunc.config.getoption('--envi') == 'online':
             test_data = GetData(path=data_path, envi='online').get_data()
             metafunc.parametrize('empty_login', test_data[1], ids=test_data[0])
+            logger.info('返回参数化数据')
     if 'right_login' in metafunc.fixturenames:
         data_path = os.path.join(dir_path[0] , 'test_right_phone')
         if metafunc.config.getoption('--envi') == 'debug':
             test_data = GetData(path=data_path, envi='debug').get_data()
             metafunc.parametrize('right_login', test_data[1], ids=test_data[0])
+            logger.info('返回参数化数据')
         elif metafunc.config.getoption('--envi') == 'online':
             test_data = GetData(path=data_path, envi='online').get_data()
             metafunc.parametrize('right_login', test_data[1], ids=test_data[0])
+            logger.info('返回参数化数据')
     if 'empty_password' in metafunc.fixturenames:
         data_path = os.path.join(dir_path[0], 'test_empty_password')
         if metafunc.config.getoption('--envi') == 'debug':
             test_data = GetData(path=data_path, envi='debug').get_data()
             metafunc.parametrize('empty_password', test_data[1], ids=test_data[0])
+            logger.info('返回参数化数据')
         if metafunc.config.getoption('--envi') == 'online':
             test_data = GetData(path=data_path, envi='online').get_data()
             metafunc.paramerrize('empty_password', test_data[0], ids=test_data[1])
+            logger.info('返回参数化数据')
 
 
 

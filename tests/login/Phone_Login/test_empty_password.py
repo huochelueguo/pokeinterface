@@ -29,13 +29,16 @@ class Test_Password(object):
     def test_empty_password(self, get_config, empty_password):
         """
         用例描述：使用正确的手机号码和空的密码登录
+        :param get_config: 读取conftest配置，获得环境
+        :param empty_password: 获取参数化数据
+        :return:
         """
         def_name = sys._getframe().f_code.co_name
         logger.info("开始执行脚本%s:", def_name)
         test_url = get_config[0] + empty_password[1].get('path')
         test_body = empty_password[1].get('body')
         test_header = empty_password[1].get('headers')
-        res = Post(url=test_url, header=test_header, body=test_body).post_request()[0]
+        res = Post(url=test_url, header=test_header, data=test_body).post_request()[0]
         logger.info(f'进行数据对比{def_name}\n')
         assert empty_password[2].get('code') == res.get('error_code')
         assert empty_password[2].get('err_msg') == res.get('err_msg')

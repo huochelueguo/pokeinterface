@@ -20,8 +20,11 @@ def test_fans():
     url1 = 'http://test.api.pokekara.com/api/user/login'
     url2 = ''
     datas2 = ''
-    a = ReturnToken(url=url1, body=datas, header=header).post_request()
+    a = ReturnToken(url=url1, data=datas, header=header).post_request()
     print(a)
-    assert 1 == 1
+
+    url2 = 'http://test.api/user/relationship/followers'
+
+
 
 

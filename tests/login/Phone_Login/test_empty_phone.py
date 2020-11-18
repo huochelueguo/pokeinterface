@@ -31,13 +31,16 @@ class Test_Empty(object):
     def test_empty_phone(self, empty_login, get_config):
         """
         用例描述：使用空的手机号码+非空密码登录
+        :param empty_login: 读取conftest配置，获得环境
+        :param get_config: 获取参数化数据
+        :return:
         """
         def_name = sys._getframe().f_code.co_name
         logger.info("开始执行脚本%s:", def_name)
         test_url = get_config[0] + empty_login[1].get('path')
         test_header = empty_login[1].get('headers')
         test_body = empty_login[1].get('body')
-        res = Post(url=test_url, header=test_header, body=test_body).post_request()
+        res = Post(url=test_url, header=test_header, data=test_body).post_request()
         res_data = res[0]
         res_code = res[1]
         # print(res)

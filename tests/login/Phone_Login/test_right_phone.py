@@ -30,13 +30,16 @@ class Test_Login(object):
     def test_right_login(self, right_login, get_config):
         """
         用例描述：使用正确的手机号码和密码登录
+        :param right_login: 获取参数化数据
+        :param get_config: 读取conftest配置，获得环境
+        :return:
         """
         test_url = get_config[0] + right_login[1].get('path')
         test_header = right_login[1].get('headers')
         test_body = right_login[1].get('body')
         def_name = sys._getframe().f_code.co_name
         logger.info("开始执行脚本%s:", def_name)
-        res = Post(url=test_url, header=test_header, body=test_body).post_request()
+        res = Post(url=test_url, header=test_header, data=test_body).post_request()
         res_data = res[0]
         res_code = res[1]
         # print(res[0])
