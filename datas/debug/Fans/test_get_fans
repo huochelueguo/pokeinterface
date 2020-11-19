@@ -1,0 +1,6 @@
+tests:
+  - desc: '获取用户粉丝数'
+    http:
+      path: '/api/user/relationship/followings'
+      header: ''
+      params: {cookie: ''}

@@ -32,9 +32,11 @@ class ReturnToken(Post):
         res = super().post_request()
         res_dict = res[0]
         res_token = res_dict.get('data').get('poke_session_id')
+        str = 'poke_session_id='
+        token = str + res_token
         logger.info('获取token')
-        print(type(res))
-        return res_token
+        print(type(token))
+        return token
 
 
 if __name__ == '__main__':
