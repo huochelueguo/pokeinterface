@@ -1,5 +1,5 @@
 tests:
-  - desc: '获取用户粉丝数'
+  - desc: '获取登录用户粉丝数'
     http:
       path: '/api/user/relationship/followings'
       header: ''

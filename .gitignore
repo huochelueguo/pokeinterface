@@ -132,3 +132,4 @@ dmypy.json
 /report
 
 
+logs/__init__.py
