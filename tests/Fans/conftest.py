@@ -12,28 +12,41 @@ from commom.RequestPost import Post
 from commom.GetToken import ReturnToken
 from commom.GetYaml import GetData
 
+PATH = os.path.split(__file__)[0]
+DATA_PATH = os.path.join(PATH, 'test_get_fans')
+DEBUG_DATA = GetData(path=DATA_PATH, envi='debug').get_data()
+ONLINE_DATA = GetData(path=DATA_PATH, envi='online').get_data()
+
 
 @pytest.fixture(scope='function', autouse=True)
 def get_fans_token(get_config):
-    # todo: 1.修改读取数据方法； 2.增加写入数据方法
-    header = ''
-    url1 = 'http://test.api.pokekara.com/api/user/login'
-    path = os.path.split(__file__)[0]
-    data_path = os.path.join(path, 'test_get_fans')
+    global DEBUG_DATA
+    # todo: scope要改成class
     # 根据主conftest中的getconfig读取环境配置信息
     if get_config[1] == 'debug':
-        data = GetData(path=data_path, envi='debug').get_data()
-        print(data)
-        a = ReturnToken(url=url1, data=data, header=header).post_request()
-        return a
-    elif get_config[1] == 'debug':
-        data = GetData(path=data_path, envi='online').get_data()
-        print(data)
-        a = ReturnToken(url=url1, data=data, header=header).post_request()
-        return a
+        DEBUG_DATA = GetData(path=DATA_PATH, envi='debug').get_data()
+        print(DEBUG_DATA)
+    elif get_config[1] == 'online':
+        DEBUG_DATA = GetData(path=DATA_PATH, envi='online').get_data()
+    login_data = DEBUG_DATA[1][0][1]  # 读取数据中切割出登录所使用的数据
+    # print(DEBUG_DATA[1][1][1])
+    # print(DEBUG_DATA[0][1])
+    token = ReturnToken(url=login_data.get('path'), json=login_data.get('body'), header=login_data.get('headers')).post_request()
+    return token
+
+
+def pytest_generate_tests(metafunc):
+    if 'get_fans' in metafunc.fixturenames:
+        if metafunc.config.getoption('--envi') == 'debug':
+            test_data = DEBUG_DATA
+            metafunc.parametrize('get_fans', test_data[1][1], ids=test_data[0][1])
+        elif metafunc.config.getoption('--envi') == 'online':
+            test_data = ONLINE_DATA
+            metafunc.parametrize('get_fans', test_data[1][1], ids=test_data[0][1])
 
 
 def test_one(get_fans_token):
     a = get_fans_token
+    # print(get_fans)
     print(a)
     assert 1 == 1

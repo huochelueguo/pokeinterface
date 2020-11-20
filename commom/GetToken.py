@@ -29,7 +29,11 @@ class ReturnToken(Post):
 
     def post_request(self, kwargs=None):
         """重写父类的post_request方法，仅返回token即可"""
-        res = super().post_request()
+        try:
+            res = super().post_request()
+        except Exception as result:
+            print(result)
+            logger.error(f'{result}')
         res_dict = res[0]
         res_token = res_dict.get('data').get('poke_session_id')
         str = 'poke_session_id='

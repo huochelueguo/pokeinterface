@@ -7,8 +7,9 @@
 @Time:2020/11/17 上午9:17
 """
 # 尝试编写使用token的接口，整体流程：
-# 1.conftest中创建一个fixture来登录，获取到token后写入到yaml中，
-# 2.再使用pytest.generate.tests对case进行参数化
+# 1.conftest中创建一个fixture,该fixture先通过主fixture获取环境配置，根据环境配置读取数据
+# 2.对数据进行拆分，抓取出登录需要的数据，调用gettoken方法，获取到token
+# 3.再使用pytest.generate.tests对case进行参数化
 import os
 
 from commom.GetToken import ReturnToken
