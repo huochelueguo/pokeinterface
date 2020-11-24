@@ -10,8 +10,8 @@ tests:
   - desc: '获取登录用户粉丝数'
     http:
       path: '/api/user/relationship/followings'
-      header: ''
-      params: {cookie: ''}
+      header: {Cookie: '', Host: 'test.api.pokekara.com'}
+      params: {t_uid: ''}
     expected:
       code: 200
 

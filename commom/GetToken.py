@@ -36,11 +36,12 @@ class ReturnToken(Post):
             logger.error(f'{result}')
         res_dict = res[0]
         res_token = res_dict.get('data').get('poke_session_id')
+        res_uid = res_dict.get('data').get('xusers')[0].get('uid')
         str = 'poke_session_id='
         token = str + res_token
         logger.info('获取token')
-        print(type(token))
-        return token
+        print(res_uid)
+        return token, res_uid
 
 
 if __name__ == '__main__':

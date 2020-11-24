@@ -29,24 +29,27 @@ def get_fans_token(get_config):
     elif get_config[1] == 'online':
         DEBUG_DATA = GetData(path=DATA_PATH, envi='online').get_data()
     login_data = DEBUG_DATA[1][0][1]  # 读取数据中切割出登录所使用的数据
-    print(DEBUG_DATA[1][1])
-    print(DEBUG_DATA[0][1].split())
+    # print(DEBUG_DATA[1][1::])
+    # print(DEBUG_DATA[0][1].split())
     token = ReturnToken(url=login_data.get('path'), json=login_data.get('body'), header=login_data.get('headers')).post_request()
     yield token
 
 
 def pytest_generate_tests(metafunc):
+
     if 'get_fans' in metafunc.fixturenames:
         if metafunc.config.getoption('--envi') == 'debug':
-            test_data = DEBUG_DATA
-            metafunc.parametrize('get_fans', list(test_data[1][1]), ids=test_data[0][1].split())
+            test_data_ids = DEBUG_DATA[0][1].split()
+            test_data = DEBUG_DATA[1][1::]
+            metafunc.parametrize('get_fans', test_data, ids=test_data_ids)
         elif metafunc.config.getoption('--envi') == 'online':
-            test_data = ONLINE_DATA
-            metafunc.parametrize('get_fans', list(test_data[1][1]), ids=test_data[0][1].split())
+            test_data_ids = ONLINE_DATA[0][1].split()
+            test_data = ONLINE_DATA[1][1::]
+            metafunc.parametrize('get_fans', test_data, ids=test_data_ids)
 
 
-def test_one(get_fans_token,get_fans):
+def test_one(get_fans_token):
     a = get_fans_token
-    print(get_fans)
+    # print(get_fans.get('path'))
     print(a)
     assert 1 == 1

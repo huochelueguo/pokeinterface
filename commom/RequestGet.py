@@ -18,13 +18,14 @@ logger = log.Logger
 
 class Get(object):
 
-    def __init__(self, url, params=None):
+    def __init__(self, url, params=None, header=None):
         """
         :param url:
         :param params:
         """
         self.url = url
         self.params = params
+        self.header = header
 
     def get_request(self, **kwargs):
         try:
@@ -33,7 +34,7 @@ class Get(object):
                 logger.error('传入地址为空，请检查')
             else:
                 response = requests.get(url=self.url, params=self.params, **kwargs)
-                return response.json()
+                return response.json(), response.status_code
         except TimeoutError:
             logger.error('网络连接超时')
         except Exception as result:

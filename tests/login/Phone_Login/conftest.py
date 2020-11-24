@@ -36,6 +36,8 @@ def pytest_generate_tests(metafunc):
         data_path = os.path.join(dir_path[0] , 'test_right_phone')
         if metafunc.config.getoption('--envi') == 'debug':
             test_data = GetData(path=data_path, envi='debug').get_data()
+            print(type(test_data[1]),test_data[1])
+            print(type(test_data[0]),test_data[0])
             metafunc.parametrize('right_login', test_data[1], ids=test_data[0])
             logger.info('返回参数化数据')
         elif metafunc.config.getoption('--envi') == 'online':

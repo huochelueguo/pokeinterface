@@ -24,11 +24,21 @@ logger = log.Logger
 
 class Test_Fans(object):
 
-    def test_get_fans(self, get_fans, get_fans_token, get_config):
-        # test_url = get_config[0] + get_fans[1].get('path')
-        print(get_config[0])
-        print(get_fans[1].get('path'))
-        assert 1 == 1
+    def test_get_fans(self, get_fans_token, get_config, get_fans):
+        test_url = get_config[0] + get_fans[1].get('path')
+        test_data = list(get_fans)
+        test_header = test_data[1].get('header')
+        test_header['Cookie'] = get_fans_token[0]
+        test_params = test_data[1].get('params')
+        test_params['t_uid'] = get_fans_token[1]
+        res = Get(url=test_url, params=test_params, header=test_header).get_request()
+        res_data = res[0]
+        res_code = res[1]
+        # print(test_url)
+        # print(test_header)
+        # print(test_params)
+        # print(res)
+        assert get_fans[2].get('code') == res_code
 
 
 
