@@ -90,8 +90,10 @@ class GetData(object):
 
 if __name__ == '__main__':
     # mac
+    #(['正确的密码', '正确的密码2'], [('正确的密码', {'path': '/api/user/login', 'headers': '', 'body': {'platform': 4, 'token': 'login', 'id_token': '+8618515588536', 'secret': '111111'}}, {'code': 200, 'err_msg': 'success'}), ('正确的密码2', {'path': '/api/user/login', 'headers': '', 'body': {'platform': 4, 'token': 'login', 'id_token': '+8618515588536', 'secret': '111111'}}, {'code': 200, 'err_msg': 'success'})])
+
     # path = '/Users/sunwenxiao/PycharmProjects/poketinterface/tests/Login/Phone_Login/test_right_phone.py'
-    path = 'E:/pokeinterface/tests/login/Phone_Login/test_right_phone.py'
+    path = '/Users/sunwenxiao/PycharmProjects/pokeinterfacetest/tests/Fans/test_get_fans.py'
     a = GetData(path, envi='debug').get_test_data()
     print(a)
     print(type(a))

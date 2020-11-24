@@ -11,25 +11,24 @@
 # 2.对数据进行拆分，抓取出登录需要的数据，调用gettoken方法，获取到token
 # 3.再使用pytest.generate.tests对case进行参数化
 import os
-
+import pytest
 from commom.GetToken import ReturnToken
 from commom.RequestGet import Get
 from commom.GetYaml import GetData
-def test_fans():
+from commom.Logs import Log
 
-    header = ''
-    datas = {'platform': 4,
-                'token': 'login',
-                'id_token': '+8618515588536',
-                'secret': '111111'}
-    url1 = 'http://test.api.pokekara.com/api/user/login'
-    a = ReturnToken(url=url1, data=datas, header=header).post_request()
-    print(a)
+# 调用日志模块
+log = Log(__name__)
+logger = log.Logger
 
-    url2 = 'http://test.api/user/relationship/followers'
-    path = os.path.abspath(__file__)
-    s = GetData(path=path, envi='debug').get_data()
-    print(s)
+
+class Test_Fans(object):
+
+    def test_get_fans(self, get_fans, get_fans_token, get_config):
+        # test_url = get_config[0] + get_fans[1].get('path')
+        print(get_config[0])
+        print(get_fans[1].get('path'))
+        assert 1 == 1
 
 
 
