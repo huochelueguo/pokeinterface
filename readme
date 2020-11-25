@@ -7,8 +7,12 @@ commom:工具类封装
     RequestPost:封装post方法
     RequestGet:封装get方法
     Logs:封装日志读取类
+    Assert:封装对比方法
+    GetToken:封装获取token方法
+    GETPath:封装获取工程根目录方法
 conftest.py:初始化文件
 pytest.ini:配置文件
+run_all:运行主入口
 report:allure图形化报告文件位置（不需要上传git）
 tests:测试case
     conftest.py:  用于根据主目录中的conftest读取环境配置，通过配置读取对应的测试数据，用户参数化
