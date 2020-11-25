@@ -23,7 +23,7 @@ datas: 测试数据
 Todo(sunze)
 1.完成日志相关配置  0.7
 2.完成allure配置   0.7
-3.搭建接口依赖的case,完成获取token的公共接口
+3.搭建接口依赖的case,完成获取token的公共接口 0.7
 4.接入jsonpath进行assert
 5.后续接入email jekins
 6.对assret进行封装
