@@ -34,6 +34,7 @@ class Get(object):
                 logger.error('传入地址为空，请检查')
             else:
                 response = requests.get(url=self.url, params=self.params, **kwargs)
+                logger.info('get接口返回数据')
                 return response.json(), response.status_code
         except TimeoutError:
             logger.error('网络连接超时')
