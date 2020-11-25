@@ -8,6 +8,9 @@
 运行主入口
 """
 import pytest
+import os
+
+
 
 # 默认运行的是当前目录及子目录的所有文件夹的测试用例
 pytest.main(["-s", "-v"])
