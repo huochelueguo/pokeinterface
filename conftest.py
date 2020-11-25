@@ -8,6 +8,7 @@
 """
 import os
 import sys
+
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 import pytest
@@ -20,7 +21,6 @@ from config.ReadConfig import ReadConfig
 @pytest.fixture(scope='session', autouse=True)
 def get_config(request):
     global URL
-    # envi = 'debug'
     envi = request.config.getoption('--envi')
     try:
         URL = ReadConfig().get_envi(env=envi)
@@ -35,7 +35,8 @@ def pytest_addoption(parser):
                      default="debug",
                      help="environment: debug or online")
 
-def test_one(get_config,request):
+
+def test_one(get_config, request):
     # url2 = 'http://test.api.pokekara.com'
     # print(get_config[0])
     # print(get_config)
@@ -48,5 +49,4 @@ def test_one(get_config,request):
         path = os.path.abspath(__file__)
         data = GetData(path, 'debug').get_test_data()
         print(data)
-    assert  1 == 1
-
+    assert 1 == 1

@@ -31,16 +31,16 @@ class ReturnToken(Post):
         """重写父类的post_request方法，仅返回token即可"""
         try:
             res = super().post_request()
+            res_dict = res[0]
+            res_token = res_dict.get('data').get('poke_session_id')
+            res_uid = res_dict.get('data').get('xusers')[0].get('uid')
+            str1 = 'poke_session_id='
+            token = str1 + res_token
+            logger.info('获取到token和uid返回')
         except Exception as result:
             print(result)
-            logger.error(f'{result}')
-        res_dict = res[0]
-        res_token = res_dict.get('data').get('poke_session_id')
-        res_uid = res_dict.get('data').get('xusers')[0].get('uid')
-        str = 'poke_session_id='
-        token = str + res_token
-        logger.info('获取token')
-        print(res_uid)
+            logger.error(f'获取token出错：{result}')
+        # print(res_uid)
         return token, res_uid
 
 
