@@ -28,3 +28,10 @@ Todo(sunze)
 5.后续接入email jekins
 6.对assret进行封装
 
+版本更新记录：
+V1.0：
+    1.完成基础模块开发；
+    2.token关联接口开发；
+    3.日志模块接入
+    4.allure模块简单接入
+
