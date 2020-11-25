@@ -16,22 +16,20 @@ PATH = os.path.split(__file__)[0]
 DATA_PATH = os.path.join(PATH, 'test_get_fans')
 DEBUG_DATA = GetData(path=DATA_PATH, envi='debug').get_data()
 ONLINE_DATA = GetData(path=DATA_PATH, envi='online').get_data()
-TOKEN = ''
 
 
 @pytest.fixture(scope='class', autouse=True)
 def get_fans_token(get_config):
     # 根据主conftest中的getconfig读取环境配置信息
-    global Token
     if get_config[1] == 'debug':
         login_data = DEBUG_DATA[1][0][1]  # 读取数据中切割出登录所使用的数据
-        Token = ReturnToken(url=login_data.get('path'), json=login_data.get('body'),
+        token = ReturnToken(url=login_data.get('path'), json=login_data.get('body'),
                             header=login_data.get('headers')).post_request()    # 使用数据登录返回token和uid
     elif get_config[1] == 'online':
         login_data = ONLINE_DATA[1][0][1]  # 读取数据中切割出登录所使用的数据
-        Token = ReturnToken(url=login_data.get('path'), json=login_data.get('body'),
+        token = ReturnToken(url=login_data.get('path'), json=login_data.get('body'),
                             header=login_data.get('headers')).post_request()
-    yield Token
+    yield token
 
 
 def pytest_generate_tests(metafunc):
