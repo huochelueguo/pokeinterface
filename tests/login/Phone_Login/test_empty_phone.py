@@ -40,7 +40,7 @@ class Test_Empty(object):
         test_url = get_config[0] + empty_login[1].get('path')
         test_header = empty_login[1].get('headers')
         test_body = empty_login[1].get('body')
-        res = Post(url=test_url, header=test_header, data=test_body).post_request()
+        res = Post(url=test_url, header=test_header, json=test_body).post_request()
         res_data = res[0]
         res_code = res[1]
         # print(res)

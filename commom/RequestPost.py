@@ -51,7 +51,7 @@ class Post(object):
                 logger.info('post接口返回数据')
                 return response.json(), response.status_code
             else:
-                response = requests.post(url=self.url, data=self.data, json=self.json, **kwargs)
+                response = requests.post(url=self.url, data=self.data, json=self.json, headers=self.header)
                 logger.info('post接口返回数据')
                 return response.json(), response.status_code
         except TimeoutError:
@@ -62,13 +62,13 @@ class Post(object):
 
 
 if __name__ == '__main__':
-    header = ''
-    datas = {'platform': 4,
+    header = {'Content-Type': 'application/x-www-form-urlencoded'}
+    datas = {'platform': 7,
                 'token': 'login',
-                'id_token': '+8618515588536',
-                'secret': '111111'}
+                'id_token': 'pk1606824368991752854',
+                'secret': '$2a$10$Psy5oL27FW.scEt3gPABtOLSv2GnHH8XxCyj53v7KMj/lObQDWNZe'}
     url1 = 'http://test.api.pokekara.com/api/user/login'
     url2 = ''
     datas2 = ''
-    a = Post(url=url1, json=datas, header=header).post_request()
+    a = Post(url=url1, data=datas, header=header).post_request()
     print(a)

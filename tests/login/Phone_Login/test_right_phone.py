@@ -39,7 +39,7 @@ class Test_Login(object):
         test_body = right_login[1].get('body')
         def_name = sys._getframe().f_code.co_name
         logger.info("开始执行脚本%s:", def_name)
-        res = Post(url=test_url, header=test_header, data=test_body).post_request()
+        res = Post(url=test_url, header=test_header, json=test_body).post_request()
         res_data = res[0]
         res_code = res[1]
         # print(res[0])

@@ -38,7 +38,7 @@ class Test_Password(object):
         test_url = get_config[0] + empty_password[1].get('path')
         test_body = empty_password[1].get('body')
         test_header = empty_password[1].get('headers')
-        res = Post(url=test_url, header=test_header, data=test_body).post_request()[0]
+        res = Post(url=test_url, header=test_header, json=test_body).post_request()[0]
         logger.info(f'进行数据对比{def_name}\n')
         assert empty_password[2].get('code') == res.get('error_code')
         assert empty_password[2].get('err_msg') == res.get('err_msg')

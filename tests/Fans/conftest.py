@@ -40,11 +40,11 @@ def get_fans_zero(get_config):
     # 根据主conftest中的getconfig读取环境配置信息
     if get_config[1] == 'debug':
         login_data = DEBUG_DATA_ZERO[1][0][1]  # 读取数据中切割出登录所使用的数据
-        token = ReturnToken(url=login_data.get('path'), json=login_data.get('body'),
+        token = ReturnToken(url=login_data.get('path'), data=login_data.get('body'),
                             header=login_data.get('headers')).post_request()  # 使用数据登录返回token和uid
     elif get_config[1] == 'online':
         login_data = ONLINE_DATA_ZERO[1][0][1]  # 读取数据中切割出登录所使用的数据
-        token = ReturnToken(url=login_data.get('path'), json=login_data.get('body'),
+        token = ReturnToken(url=login_data.get('path'), data=login_data.get('body'),
                             header=login_data.get('headers')).post_request()
     yield token
 
@@ -60,6 +60,9 @@ def pytest_generate_tests(metafunc):
             test_data_ids = ONLINE_DATA[0][1].split()
             test_data = ONLINE_DATA[1][1::]
             metafunc.parametrize('get_fans', test_data, ids=test_data_ids)
+    if 'get_fans_zero' in metafunc.fixturenames:
+        pass
+
 
 
 def test_one(get_fans_token):

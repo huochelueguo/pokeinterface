@@ -2,7 +2,7 @@ tests:
   - desc: '手机号为空'
     http:
       path: '/api/user/login'
-      headers: ''
+      headers: {'Content-Type': 'application/json'}
       body: {platform: 4, token: login, id_token: '', secret: '111111'}
     expected:
       code: '500'
