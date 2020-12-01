@@ -4,9 +4,9 @@ tests:
       path: 'http://test.api.pokekara.com/api/user/login'
       headers: ''
       body: {platform: 4, token: login, id_token: '+8618515588536', secret: '111111'}
-    expected:
-      code: 200
-      err_msg: 'success'
+      expected:
+        code: 200
+        err_msg: 'success'
   - desc: '获取登录用户粉丝数，非0粉丝用户'
     http:
       path: '/api/user/relationship/followings'
@@ -14,4 +14,3 @@ tests:
       params: {t_uid: ''}
     expected:
       code: 200
-
