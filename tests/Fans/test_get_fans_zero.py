@@ -8,8 +8,8 @@
 """
 # 无粉丝用户返回值验证
 import os
+import sys
 import allure
-import pytest
 from commom.RequestGet import Get
 from commom.Logs import Log
 
@@ -23,8 +23,16 @@ class Test_Fans_Zero(object):
     @allure.feature('用户粉丝数相关case')
     @allure.story('用户粉丝数为0的情况')
     @allure.step('登录获取到token后，使用token访问接口，获取粉丝数')
-    @allure.title('为0的粉丝用户')
-    def test_fans_zero(self, get_config, get_fans_zero, get_fans_token):
-        a = get_fans_token
-        print(a)
-        assert 1 ==1
+    @allure.title('无粉丝用户')
+    def test_fans_zero(self, get_config, get_fans_zero_token, get_fans_zero):
+        url = get_config[0] + get_fans_zero[1].get('path')
+        test_header = get_fans_zero[1].get('header')
+        test_header['Cookie'] = get_fans_zero_token[0]
+        test_params = get_fans_zero[1].get('params')
+        test_params['t_uid'] = get_fans_zero_token[1]
+        res = Get(url=url, params=test_params, header=test_header).get_request()
+        print(res)
+        def_name = sys._getframe().f_code.co_name
+        logger.info(f'进行数据对比{def_name}\n')
+        assert get_fans_zero[2].get('code') == 200
+        assert get_fans_zero[2].get('data') == res[0].get('data').get('users')

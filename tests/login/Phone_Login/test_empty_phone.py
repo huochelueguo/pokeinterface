@@ -44,8 +44,7 @@ class Test_Empty(object):
         res_data = res[0]
         res_code = res[1]
         # print(res)
-        # print(res_code)
+        print(res_code)
         # print(empty_login[2].get('code'))
         logger.info(f'进行数据对比{def_name}\n')
-        assert 500 == res_code
         assert empty_login[2].get('err_msg') == res_data.get('err_msg')

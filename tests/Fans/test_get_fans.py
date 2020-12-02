@@ -49,6 +49,7 @@ class Test_Fans(object):
         def_name = sys._getframe().f_code.co_name
         logger.info(f'进行数据对比{def_name}\n')
         assert get_fans[2].get('code') == res_code
+        assert get_fans[2].get('data') != res[0].get('data').get('users')
 
 
 

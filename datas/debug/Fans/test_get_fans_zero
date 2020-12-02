@@ -7,10 +7,11 @@ tests:
       expected:
         code: 200
         err_msg: 'success'
-  - desc: '获取登录用户粉丝数，非0粉丝用户'
+  - desc: '获取登录用户粉丝数，无粉丝用户'
     http:
-      path: '/api/user/relationship/followings'
+      path: '/api/user/relationship/followers'
       header: {Cookie: '', Host: 'test.api.pokekara.com'}
       params: {t_uid: ''}
     expected:
       code: 200
+      data: []

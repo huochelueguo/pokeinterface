@@ -36,7 +36,7 @@ def get_fans_token(get_config):
 
 
 @pytest.fixture(scope='class', autouse=True)
-def get_fans_zero(get_config):
+def get_fans_zero_token(get_config):
     # 根据主conftest中的getconfig读取环境配置信息
     if get_config[1] == 'debug':
         login_data = DEBUG_DATA_ZERO[1][0][1]  # 读取数据中切割出登录所使用的数据
@@ -61,7 +61,14 @@ def pytest_generate_tests(metafunc):
             test_data = ONLINE_DATA[1][1::]
             metafunc.parametrize('get_fans', test_data, ids=test_data_ids)
     if 'get_fans_zero' in metafunc.fixturenames:
-        pass
+        if metafunc.config.getoption('--envi') == 'debug':
+            test_data_ids = DEBUG_DATA_ZERO[0][1].split()
+            test_data = DEBUG_DATA_ZERO[1][1::]
+            metafunc.parametrize('get_fans_zero', test_data, ids=test_data_ids)
+        elif metafunc.config.getoption('--envi') == 'online':
+            test_data_ids = ONLINE_DATA_ZERO[0][1].split()
+            test_data = ONLINE_DATA_ZERO[1][1::]
+            metafunc.parametrize('get_fans_zero', test_data, ids=test_data_ids)
 
 
 
