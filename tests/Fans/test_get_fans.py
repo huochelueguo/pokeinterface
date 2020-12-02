@@ -11,7 +11,6 @@
 # 2.对数据进行拆分，抓取出登录需要的数据，调用gettoken方法，获取到token/uid
 # 3.再使用pytest.generate.tests对case进行参数化，使用数据进行get请求
 import sys
-
 import allure
 from commom.RequestGet import Get
 from commom.Logs import Log
