@@ -14,7 +14,6 @@ from commom import Shell
 from commom.Logs import Log
 
 
-
 if __name__ == "__main__":
     # 调用日志模块
     log = Log(__name__)
