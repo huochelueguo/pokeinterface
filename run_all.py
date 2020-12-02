@@ -9,7 +9,11 @@
 """
 import time
 import pytest
+
+from commom import Shell
 from commom.Logs import Log
+
+
 
 if __name__ == "__main__":
     # 调用日志模块
@@ -25,3 +29,16 @@ if __name__ == "__main__":
         logger.error("脚本批量执行失败！", e)
         print("脚本批量执行失败！", e)
 
+    try:
+        shell = Shell.Shell()
+        cmd = 'allure generate %s -o %s --clean' % ('./report', './report/allure_raw')
+        logger.info("开始执行报告生成")
+        print("开始执行报告生成")
+        shell.invoke(cmd)
+        logger.info("报告生成完毕")
+        print("报告生成完毕")
+    except Exception as e:
+        print("报告生成失败，请重新执行", e)
+        logger.error("报告生成失败，请重新执行", e)
+        # log.error('执行用例失败，请检查环境配置')
+        raise
