@@ -11,7 +11,7 @@ tests:
     http:
       path: '/api/user/relationship/followers'
       header: {Cookie: '', Host: 'test.api.pokekara.com'}
-      params: {t_uid: ''}
+      params: {t_uid: '', page_index: 1}
     expected:
       code: 200
       data: []
