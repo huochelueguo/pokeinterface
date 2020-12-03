@@ -26,6 +26,12 @@ class Test_Fans_Zero(object):
     @allure.title('无粉丝用户')
     @allure.severity('critical')  # 用例优先级
     def test_fans_zero(self, get_config, get_fans_zero_token, get_fans_zero):
+        """
+        :param get_config: 获取环境配置
+        :param get_fans_zero_token: 获取用户token和uid
+        :param get_fans_zero: 获取参数化数据
+        :return:
+        """
         url = get_config[0] + get_fans_zero[1].get('path')
         test_header = get_fans_zero[1].get('header')
         test_header['Cookie'] = get_fans_zero_token[0]
