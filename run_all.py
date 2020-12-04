@@ -9,6 +9,7 @@
 """
 import time
 import pytest
+import allure
 
 from commom import Shell
 from commom.Logs import Log
@@ -22,7 +23,8 @@ if __name__ == "__main__":
     try:
         print("开始执行脚本")
         logger.info("========" + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime()) + "========")
-        pytest.main(["-s", "-v"])
+        pytest.main(['-s', '-v', '--alluredir', './report'])
+        # pytest.main(['--alluredir', './report'])
         print("脚本执行完成")
     except Exception as e:
         logger.error("脚本批量执行失败！", e)
