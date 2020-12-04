@@ -13,6 +13,8 @@
 import os
 import sys
 import allure
+import jsonpath
+
 from commom.RequestGet import Get
 from commom.Logs import Log
 from commom.GetPath import Right_Path
@@ -55,11 +57,9 @@ class Test_Fans(object):
         if get_config[1] == 'debug':
             debug_path = '/datas/debug/Fans/test_fans_assert'
             fans_data_path = root_path + debug_path
-            # print(fans_data_path)
         else:
             debug_path = 'datas/online/Fans/test_fans_assert'
             fans_data_path = root_path + debug_path
-            # print(fans_data_path)
         with open(fans_data_path, 'a') as f:
             uid = res_data.get('data').get('users')[::-1][0].get('user').get('uid')
             test1 = str(uid)
