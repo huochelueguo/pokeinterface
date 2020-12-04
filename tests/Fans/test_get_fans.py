@@ -10,10 +10,12 @@
 # 1.conftest中创建一个fixture,该fixture先通过主fixture获取环境配置，根据环境配置读取数据
 # 2.对数据进行拆分，抓取出登录需要的数据，调用gettoken方法，获取到token/uid
 # 3.再使用pytest.generate.tests对case进行参数化，使用数据进行get请求
+import os
 import sys
 import allure
 from commom.RequestGet import Get
 from commom.Logs import Log
+from commom.GetPath import Right_Path
 
 # 调用日志模块
 log = Log(__name__)
@@ -43,14 +45,23 @@ class Test_Fans(object):
         res = Get(url=test_url, params=test_params, header=test_header).get_request()
         res_data = res[0]
         res_code = res[1]
-        # print(test_url)
-        # print(test_header)
-        # print(test_params)
         print(res)
         def_name = sys._getframe().f_code.co_name
         logger.info(f'进行数据对比{def_name}\n')
         assert get_fans[2].get('code') == res_code
         assert get_fans[2].get('data') != res[0].get('data').get('users')
-
-
-
+        # 将两页的结果分别存入test_fans_asser中，为了在test_fanse_assert中对比两页最后和第一个用户是否一致
+        root_path = Right_Path().root_path()
+        if get_config[1] == 'debug':
+            debug_path = '/datas/debug/Fans/test_fans_assert'
+            fans_data_path = root_path + debug_path
+            # print(fans_data_path)
+        else:
+            debug_path = 'datas/online/Fans/test_fans_assert'
+            fans_data_path = root_path + debug_path
+            # print(fans_data_path)
+        with open(fans_data_path, 'a') as f:
+            uid = res_data.get('data').get('users')[::-1][0].get('user').get('uid')
+            test1 = str(uid)
+            f.write(test1 + '\n')
+            logger.info('将服务端返回结果存入test_fans_assert')
