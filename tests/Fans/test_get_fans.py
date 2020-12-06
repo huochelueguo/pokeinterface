@@ -61,7 +61,9 @@ class Test_Fans(object):
             debug_path = 'datas/online/Fans/test_fans_assert'
             fans_data_path = root_path + debug_path
         with open(fans_data_path, 'a') as f:
-            uid = res_data.get('data').get('users')[::-1][0].get('user').get('uid')
+            # uid = res_data.get('data').get('users')[::-1][0].get('user').get('uid')
+            # 使用jsonpath替代原来的定位方法
+            uid = jsonpath.jsonpath(res_data, '$..uid')[-1]
             test1 = str(uid)
             f.write(test1 + '\n')
             logger.info('将服务端返回结果存入test_fans_assert')
