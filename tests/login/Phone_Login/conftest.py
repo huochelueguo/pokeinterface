@@ -27,11 +27,11 @@ def pytest_generate_tests(metafunc):
         if metafunc.config.getoption('--envi') == 'debug':
             test_data = GetData(path=data_path, envi='debug').get_data()
             metafunc.parametrize('empty_login', test_data[1], ids=test_data[0])
-            logger.info('返回参数化数据')
+            logger.info('返回参数化数据【空手机号码+正确的密码】')
         elif metafunc.config.getoption('--envi') == 'online':
             test_data = GetData(path=data_path, envi='online').get_data()
             metafunc.parametrize('empty_login', test_data[1], ids=test_data[0])
-            logger.info('返回参数化数据')
+            logger.info('返回参数化数据【空手机号码+正确的密码】')
     if 'right_login' in metafunc.fixturenames:
         data_path = os.path.join(dir_path[0] , 'test_right_phone')
         if metafunc.config.getoption('--envi') == 'debug':
@@ -39,21 +39,21 @@ def pytest_generate_tests(metafunc):
             print(type(test_data[1]),test_data[1])
             print(type(test_data[0]),test_data[0])
             metafunc.parametrize('right_login', test_data[1], ids=test_data[0])
-            logger.info('返回参数化数据')
+            logger.info('返回参数化数据【正确手机号+正确的密码】')
         elif metafunc.config.getoption('--envi') == 'online':
             test_data = GetData(path=data_path, envi='online').get_data()
             metafunc.parametrize('right_login', test_data[1], ids=test_data[0])
-            logger.info('返回参数化数据')
+            logger.info('返回参数化数据【正确手机号+正确的密码】')
     if 'empty_password' in metafunc.fixturenames:
         data_path = os.path.join(dir_path[0], 'test_empty_password')
         if metafunc.config.getoption('--envi') == 'debug':
             test_data = GetData(path=data_path, envi='debug').get_data()
             metafunc.parametrize('empty_password', test_data[1], ids=test_data[0])
-            logger.info('返回参数化数据')
+            logger.info('返回参数化数据【正确手机号+空的密码】')
         if metafunc.config.getoption('--envi') == 'online':
             test_data = GetData(path=data_path, envi='online').get_data()
             metafunc.paramerrize('empty_password', test_data[0], ids=test_data[1])
-            logger.info('返回参数化数据')
+            logger.info('返回参数化数据【正确手机号+空的密码】')
 
 
 

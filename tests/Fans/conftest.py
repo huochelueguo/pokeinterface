@@ -11,7 +11,11 @@ import pytest
 from commom.RequestPost import Post
 from commom.GetToken import ReturnToken
 from commom.GetYaml import GetData
+from commom.Logs import Log
 
+# 调用日志模块
+log = Log(__name__)
+logger = log.Logger
 PATH = os.path.split(__file__)[0]
 DATA_PATH = os.path.join(PATH, 'test_get_fans')
 DEBUG_DATA = GetData(path=DATA_PATH, envi='debug').get_data()
@@ -57,19 +61,23 @@ def pytest_generate_tests(metafunc):
             test_data_ids = DEBUG_DATA[0][1::]
             test_data = DEBUG_DATA[1][1::]
             metafunc.parametrize('get_fans', test_data, ids=test_data_ids)
+            logger.info('返回参数化数据【用户粉丝数非0的情况】')
         elif metafunc.config.getoption('--envi') == 'online':
             test_data_ids = ONLINE_DATA[0][1].split()
             test_data = ONLINE_DATA[1][1::]
             metafunc.parametrize('get_fans', test_data, ids=test_data_ids)
+            logger.info('返回参数化数据【用户粉丝数非0的情况】')
     if 'get_fans_zero' in metafunc.fixturenames:
         if metafunc.config.getoption('--envi') == 'debug':
             test_data_ids = DEBUG_DATA_ZERO[0][1].split()
             test_data = DEBUG_DATA_ZERO[1][1::]
             metafunc.parametrize('get_fans_zero', test_data, ids=test_data_ids)
+            logger.info('返回参数化数据【用户粉丝数为0的情况】')
         elif metafunc.config.getoption('--envi') == 'online':
             test_data_ids = ONLINE_DATA_ZERO[0][1].split()
             test_data = ONLINE_DATA_ZERO[1][1::]
             metafunc.parametrize('get_fans_zero', test_data, ids=test_data_ids)
+            logger.info('返回参数化数据【用户粉丝数为0的情况】')
 
 
 
