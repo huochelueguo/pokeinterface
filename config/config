@@ -1,7 +1,7 @@
 # 配置文件：环境、邮箱、数据库等
 
 debug:
-  - url: http://test.api.pokekara.com
+  - url: https://test.api.pokekara.com
 
 online:
-  - url: http://api.pokekara.com
+  - url: https://api.pokekara.com
