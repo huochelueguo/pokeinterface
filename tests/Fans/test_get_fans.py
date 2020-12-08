@@ -64,6 +64,6 @@ class Test_Fans(object):
             # uid = res_data.get('data').get('users')[::-1][0].get('user').get('uid')
             # 使用jsonpath替代原来的定位方法
             uid = jsonpath.jsonpath(res_data, '$..uid')[-1]
-            test1 = str(uid)
-            f.write(test1 + '\n')
+            str_uid = str(uid)
+            f.write(str_uid + '\n')
             logger.info('将服务端返回结果存入test_fans_assert')
