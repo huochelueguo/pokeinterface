@@ -80,7 +80,6 @@ def pytest_generate_tests(metafunc):
             logger.info('返回参数化数据【用户粉丝数为0的情况】')
 
 
-
 def test_one(get_fans_token):
     a = get_fans_token
     # print(get_fans.get('path'))
