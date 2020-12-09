@@ -18,7 +18,7 @@ logger = log.Logger
 
 class Get(object):
 
-    def __init__(self, url, params=None, header=None):
+    def __init__(self, url, params=None, header=None, verify=False):
         """
         :param url:
         :param params:
@@ -26,6 +26,7 @@ class Get(object):
         self.url = url
         self.params = params
         self.header = header
+        self.verify = verify
 
     def get_request(self, **kwargs):
         try:
@@ -33,7 +34,7 @@ class Get(object):
                 print('传入内容为空，请检查')
                 logger.error('传入地址为空，请检查')
             else:
-                response = requests.get(url=self.url, params=self.params, **kwargs)
+                response = requests.get(url=self.url, params=self.params, verify=self.verify, **kwargs)
                 logger.info('get接口返回数据')
                 return response.json(), response.status_code
         except TimeoutError:

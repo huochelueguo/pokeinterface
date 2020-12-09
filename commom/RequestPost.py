@@ -46,12 +46,12 @@ class Post(object):
                 print('输入请求体为空，请检查')
                 logging.error('输入请求体为空，请检查')
             elif self.header == '':
-                response = requests.post(url=self.url, data=self.data, json=self.json)
+                response = requests.post(url=self.url, data=self.data, verify=False, json=self.json)
                 # Todo(sunze):需要判断接口返回数据内容，打印不同日志
                 logger.info('post接口返回数据')
                 return response.json(), response.status_code
             else:
-                response = requests.post(url=self.url, data=self.data, json=self.json, headers=self.header)
+                response = requests.post(url=self.url, data=self.data, json=self.json, verify=False, headers=self.header)
                 logger.info('post接口返回数据')
                 return response.json(), response.status_code
         except TimeoutError:
