@@ -133,3 +133,4 @@ dmypy.json
 
 
 logs/__init__.py
+!/datas/debug/Fans/test_fans_assert
