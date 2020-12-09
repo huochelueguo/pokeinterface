@@ -18,23 +18,21 @@ log = Log(__name__)
 logger = log.Logger
 PATH = os.path.split(__file__)[0]
 DATA_PATH = os.path.join(PATH, 'test_get_fans')
-DEBUG_DATA = GetData(path=DATA_PATH, envi='debug').get_data()
-ONLINE_DATA = GetData(path=DATA_PATH, envi='online').get_data()
 DATA_PATH_ZERO = os.path.join(PATH, 'test_get_fans_zero')
-DEBUG_DATA_ZERO = GetData(path=DATA_PATH_ZERO, envi='debug').get_data()
-ONLINE_DATA_ZERO = GetData(path=DATA_PATH_ZERO, envi='online').get_data()
 
 
 @pytest.fixture(scope='class', autouse=True)
 def get_fans_token(get_config):
     # 根据主conftest中的getconfig读取环境配置信息
     if get_config[1] == 'debug':
-        login_data = DEBUG_DATA[1][0][1]  # 读取数据中切割出登录所使用的数据
-        print(DEBUG_DATA)
+        debug_data = GetData(path=DATA_PATH, envi='debug').get_data()
+        login_data = debug_data[1][0][1]  # 读取数据中切割出登录所使用的数据
+        print(debug_data)
         token = ReturnToken(url=login_data.get('path'), json=login_data.get('body'),
                             header=login_data.get('headers')).post_request()    # 使用数据登录返回token和uid
     elif get_config[1] == 'online':
-        login_data = ONLINE_DATA[1][0][1]  # 读取数据中切割出登录所使用的数据
+        online_data = GetData(path=DATA_PATH, envi='online').get_data()
+        login_data = online_data[1][0][1]  # 读取数据中切割出登录所使用的数据
         token = ReturnToken(url=login_data.get('path'), json=login_data.get('body'),
                             header=login_data.get('headers')).post_request()
     yield token
@@ -44,11 +42,13 @@ def get_fans_token(get_config):
 def get_fans_zero_token(get_config):
     # 根据主conftest中的getconfig读取环境配置信息
     if get_config[1] == 'debug':
-        login_data = DEBUG_DATA_ZERO[1][0][1]  # 读取数据中切割出登录所使用的数据
+        debug_data_zero = GetData(path=DATA_PATH_ZERO, envi='debug').get_data()
+        login_data = debug_data_zero[1][0][1]  # 读取数据中切割出登录所使用的数据
         token = ReturnToken(url=login_data.get('path'), data=login_data.get('body'),
                             header=login_data.get('headers')).post_request()  # 使用数据登录返回token和uid
     elif get_config[1] == 'online':
-        login_data = ONLINE_DATA_ZERO[1][0][1]  # 读取数据中切割出登录所使用的数据
+        online_data_zero = GetData(path=DATA_PATH_ZERO, envi='online').get_data()
+        login_data = online_data_zero[1][0][1]  # 读取数据中切割出登录所使用的数据
         token = ReturnToken(url=login_data.get('path'), data=login_data.get('body'),
                             header=login_data.get('headers')).post_request()
     yield token
@@ -58,24 +58,28 @@ def pytest_generate_tests(metafunc):
     # todo:目前取值为写死的，无法进行参数化，如果多组测试数据，token和对应组怎么插入
     if 'get_fans' in metafunc.fixturenames:
         if metafunc.config.getoption('--envi') == 'debug':
-            test_data_ids = DEBUG_DATA[0][1::]
-            test_data = DEBUG_DATA[1][1::]
+            debug_data = GetData(path=DATA_PATH, envi='debug').get_data()
+            test_data_ids = debug_data[0][1::]
+            test_data = debug_data[1][1::]
             metafunc.parametrize('get_fans', test_data, ids=test_data_ids)
             logger.info('返回参数化数据【用户粉丝数非0的情况】')
         elif metafunc.config.getoption('--envi') == 'online':
-            test_data_ids = ONLINE_DATA[0][1].split()
-            test_data = ONLINE_DATA[1][1::]
+            online_data = GetData(path=DATA_PATH, envi='online').get_data()
+            test_data_ids = online_data[0][1].split()
+            test_data = online_data[1][1::]
             metafunc.parametrize('get_fans', test_data, ids=test_data_ids)
             logger.info('返回参数化数据【用户粉丝数非0的情况】')
     if 'get_fans_zero' in metafunc.fixturenames:
         if metafunc.config.getoption('--envi') == 'debug':
-            test_data_ids = DEBUG_DATA_ZERO[0][1].split()
-            test_data = DEBUG_DATA_ZERO[1][1::]
+            debug_data_zero = GetData(path=DATA_PATH_ZERO, envi='debug').get_data()
+            test_data_ids = debug_data_zero[0][1].split()
+            test_data = debug_data_zero[1][1::]
             metafunc.parametrize('get_fans_zero', test_data, ids=test_data_ids)
             logger.info('返回参数化数据【用户粉丝数为0的情况】')
         elif metafunc.config.getoption('--envi') == 'online':
-            test_data_ids = ONLINE_DATA_ZERO[0][1].split()
-            test_data = ONLINE_DATA_ZERO[1][1::]
+            online_data_zero = GetData(path=DATA_PATH_ZERO, envi='online').get_data()
+            test_data_ids = online_data_zero[0][1].split()
+            test_data = online_data_zero[1][1::]
             metafunc.parametrize('get_fans_zero', test_data, ids=test_data_ids)
             logger.info('返回参数化数据【用户粉丝数为0的情况】')
     if 'followers_zero' in metafunc.fixturenames:
@@ -83,11 +87,11 @@ def pytest_generate_tests(metafunc):
         if metafunc.config.getoption('--envi') == 'debug':
             test_data = GetData(path=data_path, envi='debug').get_data()
             metafunc.parametrize('followers_zero', test_data[1], ids=test_data[0])
-            logger.info('返回参数化数据【空手机号码+正确的密码】')
+            logger.info('返回参数化数据【用户0关注情况】')
         elif metafunc.config.getoption('--envi') == 'online':
             test_data = GetData(path=data_path, envi='online').get_data()
             metafunc.parametrize('followers_zero', test_data[1], ids=test_data[0])
-            logger.info('返回参数化数据【空手机号码+正确的密码】')
+            logger.info('返回参数化数据【用户0关注情况】')
 
 
 def test_one(get_fans_token):

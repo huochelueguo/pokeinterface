@@ -6,9 +6,8 @@
 @File:test_followers_zero.py
 @Time:2020/12/8 上午9:00
 @用户关注为0的情况：应当默认关注poke子
- 注意：粉丝为0和关注数为0共用的一个新用户，同一个获取token前置方法
+
 """
-import os
 import sys
 import allure
 import jsonpath
@@ -22,8 +21,9 @@ logger = log.Logger
 
 
 class Test_Follwoers_Zero(object):
-    @allure.feature('')
-    @allure.story('')
+    # 注意：粉丝为0和关注数为0共用的一个新用户，同一个获取token前置方法
+    @allure.feature('用户关注相关case')
+    @allure.story('用户无关注的情况')
     @allure.step('登录获取到token后，使用token访问接口，获取粉丝数')
     @allure.title('关注：0关注情况')
     @allure.severity('critical')  # 用例优先级
