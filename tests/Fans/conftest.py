@@ -78,6 +78,16 @@ def pytest_generate_tests(metafunc):
             test_data = ONLINE_DATA_ZERO[1][1::]
             metafunc.parametrize('get_fans_zero', test_data, ids=test_data_ids)
             logger.info('返回参数化数据【用户粉丝数为0的情况】')
+    if 'followers_zero' in metafunc.fixturenames:
+        data_path = os.path.join(PATH + '/test_followers_zero')
+        if metafunc.config.getoption('--envi') == 'debug':
+            test_data = GetData(path=data_path, envi='debug').get_data()
+            metafunc.parametrize('followers_zero', test_data[1], ids=test_data[0])
+            logger.info('返回参数化数据【空手机号码+正确的密码】')
+        elif metafunc.config.getoption('--envi') == 'online':
+            test_data = GetData(path=data_path, envi='online').get_data()
+            metafunc.parametrize('followers_zero', test_data[1], ids=test_data[0])
+            logger.info('返回参数化数据【空手机号码+正确的密码】')
 
 
 def test_one(get_fans_token):
