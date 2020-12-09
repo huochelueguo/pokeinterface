@@ -28,7 +28,7 @@ class Test_Fans_Assert(object):
     @allure.step('通过test_get_fans获取两页数据，将第一页最后一位数据和第二页第一位进行对比')
     @allure.title('核对两页下发数据不一致')
     @allure.severity('critical')  # 用例优先级
-    @pytest.mark.run(order=-1)  # 因为只有test_get_fans运行后才有数据，因此要把该用例顺序后置，正数>无符号>负数
+    @pytest.mark.run(order=2)  # 因为只有test_get_fans运行后才有数据，因此要把该用例顺序后置，正数>无符号>负数
     def test_assert(self, get_config):
         root_path = Right_Path().root_path()
         if get_config[1] == 'debug':
@@ -53,5 +53,6 @@ class Test_Fans_Assert(object):
                 # 对比完成，清空内容，为下次写入做准备
                 f.seek(0)
                 f.truncate()
+                logger.info(f'{def_name}清空数据\n')
 
 

@@ -14,6 +14,7 @@ import os
 import sys
 import allure
 import jsonpath
+import pytest
 
 from commom.RequestGet import Get
 from commom.Logs import Log
@@ -31,6 +32,7 @@ class Test_Fans(object):
     @allure.step('登录获取到token后，使用token访问接口，获取粉丝数')
     @allure.title('非0的粉丝用户')
     @allure.severity('critical')  # 用例优先级
+    @pytest.mark.run(order=1)
     def test_get_fans(self, get_fans_token, get_config, get_fans):
         """
         :param get_fans_token: 返回登录用户token/uid
