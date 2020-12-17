@@ -23,7 +23,7 @@ class Test_Fans_Zero(object):
     @allure.feature('用户粉丝数相关case')
     @allure.story('用户粉丝数为0的情况')
     @allure.step('登录获取到token后，使用token访问接口，获取粉丝数')
-    @allure.title('无粉丝用户')
+    @allure.title('用户粉丝数为0')
     @allure.severity('critical')  # 用例优先级
     def test_fans_zero(self, get_config, get_fans_zero_token, get_fans_zero):
         """

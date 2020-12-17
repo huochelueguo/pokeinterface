@@ -23,7 +23,7 @@ logger = log.Logger
 class Test_Follwoers_Zero(object):
     # 注意：粉丝为0和关注数为0共用的一个新用户，同一个获取token前置方法
     @allure.feature('用户关注相关case')
-    @allure.story('用户无关注的情况')
+    @allure.story('用户0关注的情况')
     @allure.step('登录获取到token后，使用token访问接口，获取粉丝数')
     @allure.title('关注：0关注情况')
     @allure.severity('critical')  # 用例优先级
