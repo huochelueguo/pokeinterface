@@ -1,9 +1,17 @@
 tests:
-  - desc: '获取登录用户关注数，有粉丝，接口返回非空列表'
+  - desc: '获取登录用户关注数第一页，有粉丝，接口返回非空列表'
     http:
       path: '/api/user/relationship/followings'
       header: {Cookie: '', Host: 'test.api.pokekara.com'}
-      params: {page_index: 1}
+      params: {page_index: 1, t_uid: ''}
     expected:
       code: 200
-      data: []
+      data: {has_more: true}
+  - desc: '获取登录用户关注数第10000页，无数据，接口返回空列表'
+    http:
+      path: '/api/user/relationship/followings'
+      header: {Cookie: '', Host: 'test.api.pokekara.com'}
+      params: {page_index: 10000, t_uid: ''}
+    expected:
+      code: 200
+      data: {has_more: false}
