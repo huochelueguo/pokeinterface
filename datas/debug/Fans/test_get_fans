@@ -14,7 +14,7 @@ tests:
       params: {t_uid: '', page_index: 1}
     expected:
       code: 200
-      data: []
+      data: {}
   - desc: '获取登录用户第二页粉丝数户'
     http:
       path: '/api/user/relationship/followers'
@@ -22,5 +22,13 @@ tests:
       params: {t_uid: '', page_index: 2}
     expected:
       code: 200
-      data: []
+      data: {}
+  - desc: '获取登录用户第一万页粉丝数，正常为空，但是不报错'
+    http:
+      path: '/api/user/relationship/followers'
+      header: {Cookie: '', Host: 'test.api.pokekara.com'}
+      params: {t_uid: '', page_index: 10000}
+    expected:
+      code: 200
+      data: {has_more: false}
 

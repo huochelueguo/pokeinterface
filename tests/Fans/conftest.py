@@ -29,7 +29,7 @@ def get_fans_token(get_config):
         login_data = debug_data[1][0][1]  # 读取数据中切割出登录所使用的数据
         token = ReturnToken(url=login_data.get('path'), json=login_data.get('body'),
                             header=login_data.get('headers')).post_request()    # 使用数据登录返回token和uid
-        print(token)
+        # print(token)
     elif get_config[1] == 'online':
         online_data = GetData(path=DATA_PATH, envi='online').get_data()
         login_data = online_data[1][0][1]  # 读取数据中切割出登录所使用的数据

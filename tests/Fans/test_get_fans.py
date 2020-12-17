@@ -49,23 +49,26 @@ class Test_Fans(object):
         res = Get(url=test_url, params=test_params, header=test_header).get_request()
         res_data = res[0]
         res_code = res[1]
-        print(res)
+        # print(res_data)
         def_name = sys._getframe().f_code.co_name
         logger.info(f'进行数据对比{def_name}\n')
         assert get_fans[2].get('code') == res_code
-        assert get_fans[2].get('data') != res[0].get('data').get('users')
-        # 将两页的结果分别存入test_fans_asser中，为了在test_fanse_assert中对比两页最后和第一个用户是否一致
-        root_path = Right_Path().root_path()
-        if get_config[1] == 'debug':
-            debug_path = '/datas/debug/Fans/test_fans_assert'
-            fans_data_path = root_path + debug_path
-        else:
-            debug_path = 'datas/online/Fans/test_fans_assert'
-            fans_data_path = root_path + debug_path
-        with open(fans_data_path, 'a') as f:
-            # uid = res_data.get('data').get('users')[::-1][0].get('user').get('uid')
-            # 使用jsonpath替代原来的定位方法
-            uid = jsonpath.jsonpath(res_data, '$..uid')[-1]
-            str_uid = str(uid)
-            f.write(str_uid + '\n')
+        if test_params.get('page_index') < 9999:
+            assert get_fans[2].get('data') != res[0].get('data').get('users')
             logger.info('将服务端返回结果存入test_fans_assert')
+            # 将两页的结果分别存入test_fans_asser中，为了在test_fanse_assert中对比两页最后和第一个用户是否一致
+            root_path = Right_Path().root_path()
+            if get_config[1] == 'debug':
+                debug_path = '/datas/debug/Fans/test_fans_assert'
+                fans_data_path = root_path + debug_path
+            else:
+                debug_path = 'datas/online/Fans/test_fans_assert'
+                fans_data_path = root_path + debug_path
+            with open(fans_data_path, 'a') as f:
+                # uid = res_data.get('data').get('users')[::-1][0].get('user').get('uid')
+                # 使用jsonpath替代原来的定位方法
+                uid = jsonpath.jsonpath(res_data, '$..uid')[-1]
+                str_uid = str(uid)
+                f.write(str_uid + '\n')
+        else:
+            assert get_fans[2].get('data').get('has_more') == res_data.get('data').get('has_more')
