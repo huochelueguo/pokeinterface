@@ -1,8 +1,8 @@
 tests:
   - desc: '登录帐号，获取token'
     http:
-      path: 'http://test.api.pokekara.com/api/user/login'
-      headers: ''
+      path: 'https://test.api.pokekara.com/api/user/login'
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'}
       body: {platform: 4, token: login, id_token: '+8618515588536', secret: '111111'}
     expected:
       code: 200

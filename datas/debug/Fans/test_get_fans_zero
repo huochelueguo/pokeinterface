@@ -1,12 +1,12 @@
 tests:
   - desc: '登录帐号，获取token'
     http:
-      path: 'http://test.api.pokekara.com/api/user/login'
+      path: 'https://test.api.pokekara.com/api/user/login'
       headers: {'Content-Type': 'application/x-www-form-urlencoded'}
       body: {platform: 7, token: login, id_token: 'pk1606824368991752854', secret: '$2a$10$Psy5oL27FW.scEt3gPABtOLSv2GnHH8XxCyj53v7KMj/lObQDWNZe'}
-      expected:
-        code: 200
-        err_msg: 'success'
+    expected:
+      code: 200
+      err_msg: 'success'
   - desc: '获取登录用户粉丝数，无粉丝用户'
     http:
       path: '/api/user/relationship/followers'

@@ -55,7 +55,7 @@ if __name__ == '__main__':
     #             'token': 'login',
     #             'id_token': 'pk1606824368991752854',
     #             'secret': '$2a$10$Psy5oL27FW.scEt3gPABtOLSv2GnHH8XxCyj53v7KMj/lObQDWNZe'}
-    url1 = 'http://test.api.pokekara.com/api/user/login'
+    url1 = 'https://test.api.pokekara.com/api/user/login'
     url2 = ''
     datas2 = ''
     a = ReturnToken(url=url1, json=datas, header=header).post_request()
