@@ -21,7 +21,7 @@ DATA_PATH = os.path.join(PATH, 'test_get_fans')
 DATA_PATH_ZERO = os.path.join(PATH, 'test_get_fans_zero')
 
 
-@pytest.fixture(scope='class', autouse=True)
+@pytest.fixture(scope='class')
 def get_fans_token(get_config):
     # 根据主conftest中的getconfig读取环境配置信息
     if get_config[1] == 'debug':
@@ -38,7 +38,7 @@ def get_fans_token(get_config):
     yield token
 
 
-@pytest.fixture(scope='class', autouse=True)
+@pytest.fixture(scope='class')
 def get_fans_zero_token(get_config):
     # 根据主conftest中的getconfig读取环境配置信息
     if get_config[1] == 'debug':
@@ -106,12 +106,21 @@ def pytest_generate_tests(metafunc):
         if metafunc.config.getoption('--envi') == 'debug':
             test_data = GetData(path=data_path, envi='debug').get_data()
         elif metafunc.config.getoption('--envi') == 'online':
-            test_data = GetData(path=data_path, envi='online')
+            test_data = GetData(path=data_path, envi='online').get_data()
         metafunc.parametrize('follow_user', test_data[1], ids=test_data[0])
+        logger.info('返回参数化数据【关注用户】')
+    if 'unfollow_user' in metafunc.fixturenames:
+        data_path = os.path.join(PATH + '/test_unfollow_user')
+        if metafunc.config.getoption('--envi') == 'debug':
+            test_data = GetData(path=data_path, envi='debug').get_data()
+        elif metafunc.config.getoption('--envi') == 'online':
+            test_data = GetData(path=data_path, envi='online').get_data()
+        metafunc.parametrize('unfollow_user', test_data[1], ids=test_data[0])
+        logger.info('返回参数化数据【取消关注】')
 
 
-def test_one(get_fans_token):
-    a = get_fans_token
+def test_one(unfollow_user):
+    a = unfollow_user[1]
     # print(get_fans.get('path'))
     print(a)
     assert 1 == 1

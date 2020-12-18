@@ -7,9 +7,7 @@
 @Time:NAME.py@Time:2020/12/18 15:05
 @ 关注用户：非官方账号
 """
-import json
 import sys
-
 import pytest
 import allure
 import jsonpath
@@ -28,6 +26,7 @@ class Test_Follow(object):
     @allure.step('登录获取到token后，使用token访问接口，关注其他用户')
     @allure.title('{follow_user[0]}')
     @allure.severity('critical')  # 用例优先级
+    @pytest.mark.run(1)
     def test_follow_user(self, get_config, get_fans_token, follow_user):
         test_url = get_config[0] + follow_user[1].get('path')
         test_header = follow_user[1].get('header')

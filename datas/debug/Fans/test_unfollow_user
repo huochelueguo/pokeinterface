@@ -1,0 +1,9 @@
+tests:
+  - desc: '取消关注'
+    http:
+      path: '/api/user/relationship/unfollow'
+      header: {Cookie: '', Host: 'test.api.pokekara.com', 'Content-Type': 'application/x-www-form-urlencoded'}
+      body: {t_uid: 'u1577357390617775200'}
+    expected:
+      code: 200
+      relation: 0
