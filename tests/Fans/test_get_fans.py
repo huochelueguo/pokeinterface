@@ -27,7 +27,7 @@ logger = log.Logger
 
 class Test_Fans(object):
 
-    @allure.feature('用户粉丝数相关case')
+    @allure.feature('用户粉丝&关注相关case')
     @allure.story('用户粉丝数非0的情况')
     @allure.step('登录获取到token后，使用token访问接口，获取粉丝数')
     @allure.title('{get_fans[0]}')

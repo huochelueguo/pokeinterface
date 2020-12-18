@@ -23,7 +23,7 @@ logger = log.Logger
 
 class Test_Fans_Assert(object):
 
-    @allure.feature('用户粉丝数相关case')
+    @allure.feature('用户粉丝&关注相关case')
     @allure.story('用户粉丝数非0的情况')
     @allure.step('通过test_get_fans获取两页数据，将第一页最后一位数据和第二页第一位进行对比')
     @allure.title('核对两页粉丝信息下发数据不一致')

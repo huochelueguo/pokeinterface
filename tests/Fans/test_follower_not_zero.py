@@ -22,7 +22,7 @@ logger = log.Logger
 
 
 class Test_Followings_Not_Zero(object):
-    @allure.feature('用户关注相关case')
+    @allure.feature('用户粉丝&关注相关case')
     @allure.story('用户有关注的情况')
     @allure.step('登录获取到token后，使用token访问接口，获取粉丝数')
     @allure.title('{followers_not_zero[0]}')
