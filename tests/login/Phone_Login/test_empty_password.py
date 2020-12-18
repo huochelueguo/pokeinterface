@@ -26,6 +26,7 @@ class Test_Password(object):
     @allure.feature('手机号码登录')
     @allure.story('手机号码+空的密码')
     @allure.severity('critical')
+    @allure.title('{empty_password[0]}')
     def test_empty_password(self, get_config, empty_password):
         """
         用例描述：使用正确的手机号码和空的密码登录

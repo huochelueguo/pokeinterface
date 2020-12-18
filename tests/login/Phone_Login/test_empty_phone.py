@@ -28,6 +28,7 @@ class Test_Empty(object):
     @allure.feature('手机号码登录')
     @allure.story('空手机号码+正确的密码')
     @allure.severity('critical')
+    @allure.title('{empty_login[0]}')
     def test_empty_phone(self, empty_login, get_config):
         """
         用例描述：使用空的手机号码+非空密码登录

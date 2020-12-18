@@ -25,7 +25,7 @@ class Test_Follwoers_Zero(object):
     @allure.feature('用户关注相关case')
     @allure.story('用户无关注的情况')
     @allure.step('登录获取到token后，使用token访问接口，获取粉丝数')
-    @allure.title('关注：0关注情况')
+    @allure.title('{followers_zero[0]}')
     @allure.severity('critical')  # 用例优先级
     def test_zero(self, get_config, get_fans_zero_token, followers_zero):
         test_url = get_config[0] + followers_zero[1].get('path')
