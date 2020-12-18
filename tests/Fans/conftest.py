@@ -101,6 +101,13 @@ def pytest_generate_tests(metafunc):
             test_data = GetData(path=data_path, envi='online').get_data()
         metafunc.parametrize('followers_not_zero', test_data[1], ids=test_data[0])
         logger.info('返回参数化数据【用户非0关注情况】')
+    if 'follow_user' in metafunc.fixturenames:
+        data_path = os.path.join(PATH + '/test_follow_user')
+        if metafunc.config.getoption('--envi') == 'debug':
+            test_data = GetData(path=data_path, envi='debug').get_data()
+        elif metafunc.config.getoption('--envi') == 'online':
+            test_data = GetData(path=data_path, envi='online')
+        metafunc.parametrize('follow_user', test_data[1], ids=test_data[0])
 
 
 def test_one(get_fans_token):

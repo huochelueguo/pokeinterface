@@ -1,0 +1,17 @@
+tests:
+  - desc: '关注用户（非官方账号）'
+    http:
+      path: '/api/user/relationship/follow'
+      header: {Cookie: '', Host: 'test.api.pokekara.com', 'Content-Type': 'application/x-www-form-urlencoded'}
+      body: {t_uid: 'u1577357390617775200'}
+    expected:
+      code: 200
+      relation: 0
+  - desc: '关注用户（官方账号）'
+    http:
+      path: '/api/user/relationship/follow'
+      header: {Cookie: '', Host: 'test.api.pokekara.com', 'Content-Type': 'application/x-www-form-urlencoded'}
+      body: {t_uid: 'u1000000000000000000'}
+    expected:
+      code: 500
+      relation: 0
