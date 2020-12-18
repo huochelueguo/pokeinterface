@@ -30,7 +30,7 @@ class Test_Fans(object):
     @allure.feature('用户粉丝数相关case')
     @allure.story('用户粉丝数非0的情况')
     @allure.step('登录获取到token后，使用token访问接口，获取粉丝数')
-    @allure.title('用户粉丝数不为0')
+    @allure.title('{get_fans[0]}')
     @allure.severity('critical')  # 用例优先级
     @pytest.mark.run(order=1)
     def test_get_fans(self, get_fans_token, get_config, get_fans):

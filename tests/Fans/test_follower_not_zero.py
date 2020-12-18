@@ -23,9 +23,10 @@ logger = log.Logger
 
 class Test_Followings_Not_Zero(object):
     @allure.feature('用户关注相关case')
-    @allure.story('用户有关注用户的的情况')
+    @allure.story('用户有关注的情况')
     @allure.step('登录获取到token后，使用token访问接口，获取粉丝数')
-    @allure.title('有关注用户')
+    @allure.title('{followers_not_zero[0]}')
+    # @allure.title('关注：非0关注情况')
     @allure.severity('critical')  # 用例优先级
     # 注意： 本用例和test_get_fans使用同一个账号，共同使用conftest/中的get_fans_token
     def test_followings_not_zero(self, get_config, followers_not_zero, get_fans_token):

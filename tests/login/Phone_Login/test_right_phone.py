@@ -26,7 +26,7 @@ class Test_Login(object):
     @allure.story('正确的手机号和密码')  # 标注Features功能模块下的分支功能
     @allure.severity('critical')    # 用例优先级
     @allure.step('获取手机号及对应密码后，提交登录')    # 用例每一步说明
-    @allure.title('正确手机号及密码登录')     # 用例标题
+    @allure.title('{right_login[0]}')     # 用例标题
     def test_right_login(self, right_login, get_config):
         """
         用例描述：使用正确的手机号码和密码登录
