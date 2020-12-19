@@ -21,7 +21,7 @@ DATA_PATH = os.path.join(PATH, 'test_get_fans')
 DATA_PATH_ZERO = os.path.join(PATH, 'test_get_fans_zero')
 
 
-@pytest.fixture(scope='class')
+@pytest.fixture(scope='module')
 def get_fans_token(get_config):
     # 根据主conftest中的getconfig读取环境配置信息
     if get_config[1] == 'debug':
@@ -38,7 +38,7 @@ def get_fans_token(get_config):
     yield token
 
 
-@pytest.fixture(scope='class')
+@pytest.fixture(scope='module')
 def get_fans_zero_token(get_config):
     # 根据主conftest中的getconfig读取环境配置信息
     if get_config[1] == 'debug':
