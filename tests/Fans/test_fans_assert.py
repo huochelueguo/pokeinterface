@@ -42,7 +42,10 @@ class Test_Fans_Assert(object):
             if not data:
                 logger.error('粉丝uid文件为空，无法进行对比')
                 pytest.xfail(reason='文件为空，无法进行对比，用例执行中止')
-            else:
+            elif len(data) != 2:
+                logger.error('粉丝uid文件数据错误，无法进行对比')
+                pytest.xfail(reason='文件数据错误，无法进行对比，用例执行中止')
+            elif len(data) == 2:
                 line1 = data[0][:-1]
                 line2 = data[1]
                 def_name = sys._getframe().f_code.co_name
