@@ -48,8 +48,6 @@ class Test_Fans_Assert(object):
                 def_name = sys._getframe().f_code.co_name
                 logger.info(f'进行数据对比{def_name}\n')
                 assert line1 != line2
-                # time.sleep(3)
-                # print(line1,line2)
                 # 对比完成，清空内容，为下次写入做准备
                 f.seek(0)
                 f.truncate()
