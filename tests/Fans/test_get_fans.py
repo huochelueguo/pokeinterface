@@ -49,7 +49,7 @@ class Test_Fans(object):
         res = Get(url=test_url, params=test_params, header=test_header).get_request()
         res_data = res[0]
         res_code = res[1]
-        # print(res_data)
+        # print(get_fans[1])
         def_name = sys._getframe().f_code.co_name
         logger.info(f'进行数据对比{def_name}\n')
         assert get_fans[2].get('code') == res_code
@@ -62,13 +62,21 @@ class Test_Fans(object):
                 debug_path = '/datas/debug/Fans/test_fans_assert'
                 fans_data_path = root_path + debug_path
             else:
-                debug_path = 'datas/online/Fans/test_fans_assert'
-                fans_data_path = root_path + debug_path
-            with open(fans_data_path, 'a') as f:
+                online_path = 'datas/online/Fans/test_fans_assert'
+                fans_data_path = root_path + online_path
+            with open(fans_data_path, 'a', encoding='utf-8') as f:
                 # uid = res_data.get('data').get('users')[::-1][0].get('user').get('uid')
                 # 使用jsonpath替代原来的定位方法
-                uid = jsonpath.jsonpath(res_data, '$..uid')[-1]
+                if jsonpath.jsonpath(get_fans[1], '$..page_index')[0] == 0:
+                    uid = jsonpath.jsonpath(res_data, '$..uid')[-1]
+                    print(uid)
+                elif jsonpath.jsonpath(get_fans[1], '$..page_index')[0] == 1:
+                    uid = jsonpath.jsonpath(res_data, '$..uid')[0]
+                    print(uid)
+                else:
+                    print('error')
                 str_uid = str(uid)
                 f.write(str_uid + '\n')
+                logger.info('将服务端返回结果存入test_fans_assert')
         else:
             assert get_fans[2].get('data').get('has_more') == res_data.get('data').get('has_more')
