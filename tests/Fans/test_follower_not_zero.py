@@ -28,7 +28,7 @@ class Test_Followings_Not_Zero(object):
     @allure.step('登录获取到token后，使用token访问接口，获取粉丝数')
     @allure.title('{followers_not_zero[0]}')
     @allure.severity('critical')  # 用例优先级
-    @pytest.mark.run(order=2)
+    @pytest.mark.run(order=1)
     # 注意： 本用例和test_get_fans使用同一个账号，共同使用conftest/中的get_fans_token
     def test_followings_not_zero(self, get_config, followers_not_zero, get_fans_token):
         # global assert_data_path

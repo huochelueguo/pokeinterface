@@ -27,7 +27,7 @@ class Test_Followings_Not_Zero(object):
     @allure.step('登录获取到token后，使用token访问接口，获取关注数')
     @allure.title('用户第一页最后一个数据和第二页第一个进行比对，应该不一致')
     @allure.severity('critical')  # 用例优先级
-    @pytest.mark.run(order=1)
+    @pytest.mark.run(order=2)
     def test_assert_follow(self, get_config):
         global assert_data_path
         root_path = Right_Path().root_path()
