@@ -58,7 +58,7 @@ class GetData(object):
                     expected.append(td.get('expected'))
                     test_data = zip(case, http, expected)
                     test_data_list = list(test_data)
-                    logger.info('返回测试数据【测试环境】')
+                logger.info('返回测试数据【测试环境】')
                 return case, test_data_list
         except Exception as result:
             print(result)
