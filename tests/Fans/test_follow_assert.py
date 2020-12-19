@@ -12,8 +12,6 @@ import sys
 import allure
 import pytest
 
-
-
 from commom.Logs import Log
 from commom.GetPath import Right_Path
 
@@ -21,7 +19,7 @@ log = Log(__name__)
 logger = log.Logger
 
 
-class Test_Followings_Not_Zero(object):
+class Test_Assert_Follow(object):
     @allure.feature('用户粉丝&关注相关case')
     @allure.story('用户有关注的情况')
     @allure.step('登录获取到token后，使用token访问接口，获取关注数')
@@ -41,10 +39,12 @@ class Test_Followings_Not_Zero(object):
         with open(assert_data_path, 'r+', encoding='utf-8') as f:
             data = f.readlines()
             if not data:
-                # print('文件为空,无关注uid,无法比对,中止用例')
                 logger.error('文件为空,无关注uid,无法比对,中止用例')
-                pytest.mark.xfail(reason='文件为空,无关注uid,无法比对,中止用例')
-            else:
+                pytest.xfail(reason='文件为空,无关注uid,无法比对,中止用例')
+            elif len(data) != 2:
+                logger.error('文件数据错误,无法比对,中止用例')
+                pytest.xfail(reason='文件数据错误,无法比对,中止用例')
+            elif len(data) == 2:
                 uid1 = data[0][:-1]
                 uid2 = data[1]
                 def_name = sys._getframe().f_code.co_name
