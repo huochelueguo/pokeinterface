@@ -23,7 +23,7 @@ class Test_Follow(object):
     # 使用非0关注用户，继续关注
     @allure.feature('用户粉丝&关注相关case')
     @allure.story('用户关注其他用户')
-    @allure.step('登录获取到token后，使用token访问接口，关注其他用户')
+    @allure.step('登录获取到token后，使用token访问接口，关注用户')
     @allure.title('{follow_user[0]}')
     @allure.severity('critical')  # 用例优先级
     @pytest.mark.run(1)
