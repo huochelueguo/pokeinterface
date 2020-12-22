@@ -117,6 +117,12 @@ def pytest_generate_tests(metafunc):
             test_data = GetData(path=data_path, envi='online').get_data()
         metafunc.parametrize('unfollow_user', test_data[1], ids=test_data[0])
         logger.info('返回参数化数据【取消关注】')
+    if 'delete_user' in metafunc.fixturenames:
+        data_path = os.path.join(PATH, 'test_delete_user')
+        envi = metafunc.config.getoption('--envi')
+        test_data = GetData(path=data_path, envi=envi).get_data()
+        metafunc.parametrize('delete_user', test_data[1], ids=test_data[0])
+        logger.info('返回参数化数据【删除用户】')
 
 
 def test_one(unfollow_user):

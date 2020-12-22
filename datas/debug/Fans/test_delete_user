@@ -1,0 +1,19 @@
+tests:
+  - desc: '删除用户（用户已注销）'
+    http:
+      path: '/api/user/relationship/delete'
+      header: {Cookie: '', Host: 'test.api.pokekara.com', 'Content-Type': 'application/x-www-form-urlencoded'}
+      body: {t_uid: 'u1608630333493364186'}
+    expected:
+      code: 200
+      relation: 0
+      err_msg: 'success'
+  - desc: '删除用户（用户未注销）'
+    http:
+      path: '/api/user/relationship/delete'
+      header: {Cookie: '', Host: 'test.api.pokekara.com', 'Content-Type': 'application/x-www-form-urlencoded'}
+      body: {t_uid: 'u1319210732717395968'}
+    expected:
+      code: 200
+      relation: 0
+      err_msg: '非注销用户是否应该无法删除？'
