@@ -23,3 +23,11 @@ tests:
     expected:
       code: 200
       err_msg: '相手の設定で投稿を見ることができません。'
+  - desc: '关注用户（已注销用户）'
+    http:
+      path: '/api/user/relationship/follow'
+      header: {Cookie: '', Host: 'test.api.pokekara.com', 'Content-Type': 'application/x-www-form-urlencoded'}
+      body: {t_uid: 'u1573099347349183451'}
+    expected:
+      code: 200
+      relation: 0
