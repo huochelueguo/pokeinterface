@@ -38,4 +38,7 @@ class Test_Follow(object):
         def_name = sys._getframe().f_code.co_name
         logger.info(f'进行数据对比{def_name}\n')
         assert follow_user[2].get('code') == res_code
-        assert follow_user[2].get('relation') != jsonpath.jsonpath(res_data, '$..relation')[0]
+        if not jsonpath.jsonpath(res_data, '$..relation'):
+            assert follow_user[2].get('err_msg') in res_data.get('err_msg')
+        else:
+            assert follow_user[2].get('relation') != jsonpath.jsonpath(res_data, '$..relation')[0]
