@@ -10,6 +10,7 @@
 
 # """
 import requests
+import time
 from commom.Logs import Log
 
 # 调用日志模块
@@ -66,14 +67,15 @@ class Upload_File(object):
 
     # 外部只暴露upload方法，其他为私有方法
     def __upload_image(self):
-        """
-        :return: 返回response
-        """
-        res = requests.post(url=self.url, headers=self.header, data=self.data, files=self.files, verify=False, params=self.params)
+        params = {'qaz': 3,
+                  'client_timestamp': int(time.time())}
+        res = requests.post(url=self.url, headers=self.header, data=self.data, files=self.files, verify=False, params=params)
         return res.json()
 
     def __upload_m4a(self):
-        res = requests.post(url=self.url, headers=self.header, files=self.files, verify=False, params=self.params)
+        params = {'qaz': 1,
+                  'client_timestamp': int(time.time())}
+        res = requests.post(url=self.url, headers=self.header, files=self.files, verify=False, params=params)
         return res.json()
 
 
@@ -93,7 +95,7 @@ if __name__ == '__main__':
     #     files = {
     #         'file': ('_MG_2818.jpg',  f.read(), 'multipart/form-data'),
     #         'filetype': ('', 'jpg', 'multipart/form-data; charset=utf-8')}
-    # res = Upload_File(url=url, headers=header, qaz='3', files=files, params=params).upload()
+    # res = Upload_File(url=url, headers=header, qaz='3', files=files).upload()
     # print(res)
 
     # 上传m4a
@@ -104,5 +106,5 @@ if __name__ == '__main__':
             'file': ('1608717653.m4a', f.read(), 'application/octet-stream'),
             'filetype': ('', 'm4a', 'multipart/form-data; charset=utf-8')
         }
-    music_res = Upload_File(url=url, headers=header, qaz='1', files=files_music, params=params_music).upload()
+    music_res = Upload_File(url=url, headers=header, qaz='1', files=files_music).upload()
     print(music_res)
