@@ -13,63 +13,55 @@
 #     4:  txt
 # """
 import requests
-from requests_toolbelt import MultipartEncoder
+from commom.Logs import Log
 
-# class Upload_File(object):
-#
-#     def __init__(self, url, header,  qaz, data=None, files=None):
-#         # self.file_path = file_path
-#         # self.file_type = file_type
-#         self.url = url
-#         self.header = header
-#         self.data = data
-#         self.qaz = qaz
-#         self.files = files
-#
-#     def upload_image(self):
-#
-#         res = requests.post(url=self.url, headers=self.header, data=self.data,files=self.files)
-#         print(res)
+# 调用日志模块
+log = Log(__name__)
+logger = log.Logger
+
+
+class Upload_File(object):
+
+    def __init__(self, url, header, qaz, data=None, files=None, **kwargs):
+        self.url = url
+        self.header = header
+        self.data = data
+        self.qaz = qaz
+        self.files = files
+
+    def uplaod(self):
+        if self.qaz == '3':
+            try:
+                res = self.__upload_image()
+            except Exception as result:
+                print(result)
+                logger.error(f'{result}')
+            else:
+                logger.info('image上传完成')
+                return res
+        else:
+            print('待补充')
+
+    # 外部只暴露upload方法，其他为私有方法
+    def __upload_image(self):
+        res = requests.post(url=self.url, headers=self.header, data=self.data, files=self.files, params=params, verify=False)
+        return res.json()
 
 
 if __name__ == '__main__':
-    file_type = 'jpg'
+
     file_path = "E:/pokeinterface/datas/file/image/avater_image/_MG_2818.jpg"
     url = "http://test.api.pokekara.com/api/common/upload_file"
-    header = {'Cookie': 'poke_session_id=MTYwODYzMDg5NHxjOUd0Z1ZiVHpOX3hoNGxMZUlXSmlINEwyX2lXZmlhS0V0WVZMNUM2UXZzVTczTlBfVDlzU1hWRHdKVkFIaFlhbTdHWUJKZmUyc0k2cEtnUElqTC1tZzlzWklFR1ZzTFF8GiwvPYq-_QjikjO6kO9Op5uvJLJ-qvmQOcY0nq2eka0=;',
-
-              'Host':'test.api.pokekara.com',
-              'Content-Length':'1415663'}
-
-    # files=[('file',('_MG_2818.jpg',open(file_path,'rb'),'image/jpeg'))]
-    files = {
-        'file': ('_MG_2818.jpg',  # 文件名称
-                      open(file_path,'rb'), 'image/jpeg'), # 文件路径'image/jpeg',  # 文件类型
-                'filetype': 'jpg'}
-
-    # payload={'filetype': 'jpg'}
-    # m = MultipartEncoder(
-    #     fields={'filetype': 'jpg',
-    #             'file': ('_MG_2818.jpg', open(file_path, 'rb'), 'image/jpeg')}
-    # )
-    #
-    # r = requests.post(url=url, data=m,
-    #               headers=header)
-    response = requests.request("POST", url, headers=header,  files=files)
-    print(files)
-# import requests
-#
-# url = "http://test.api.pokekara.com/api/common/upload_file"
-#
-# payload={'filetype': 'jpg'}
-# files=[
-#     ('file',('_MG_2818.jpg',open('F:/Train/TRAIN/_MG_2818.jpg','rb'),'image/jpeg'))
-# ]
-# headers = {
-#     'Cookie': 'poke_session_id=MTYwODYzMDg5NHxjOUd0Z1ZiVHpOX3hoNGxMZUlXSmlINEwyX2lXZmlhS0V0WVZMNUM2UXZzVTczTlBfVDlzU1hWRHdKVkFIaFlhbTdHWUJKZmUyc0k2cEtnUElqTC1tZzlzWklFR1ZzTFF8GiwvPYq-_QjikjO6kO9Op5uvJLJ-qvmQOcY0nq2eka0=;',
-#     'Content-Type': 'multipart/form-data; boundary=2280064a-9152-4fc5-8185-a2a4fe0be6fd'
-# }
-#
-# response = requests.request("POST", url, headers=headers, data=payload, files=files)
-#
-# print(response.text)
+    header = {'Cookie': 'poke_session_id'
+                        '=MTYwODYzMDg5NHxjOUd0Z1ZiVHpOX3hoNGxMZUlXSmlINEwyX2lXZmlhS0V0WVZMNUM2UXZzVTczTlBfVDlzU1hWRHdKVkFIaFlhbTdHWUJKZmUyc0k2cEtnUElqTC1tZzlzWklFR1ZzTFF8GiwvPYq-_QjikjO6kO9Op5uvJLJ-qvmQOcY0nq2eka0=;',
+              'Host': 'test.api.pokekara.com',
+              'Content-Length': '1415663'}
+    params = {'qaz': 3}
+    # 多个文件时使用字典或者数组即可，字段代表含义：
+    # '文件1：part:'('文件名称:file_name',  '文件值：value', '文件类型：content_type')
+    with open(file_path, 'rb') as f:
+        files = {
+            'file': ('_MG_2818.jpg',  f.read(), 'multipart/form-data'),
+            'filetype': ('', 'jpg', 'multipart/form-data; charset=utf-8')}
+    res = Upload_File(url=url, header=header, qaz='3', files=files, params=params).uplaod()
+    print(res)
