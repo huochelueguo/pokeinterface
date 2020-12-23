@@ -26,7 +26,11 @@ class GetData(object):
     """
 
     def __init__(self, path, envi):
-        """将文件路径替换为数据存储文件路径"""
+        """
+        将文件路径替换为数据存储文件路径
+        :param path: 读取文件路径
+        :param envi: 读取环境
+        """
         path_yaml = os.path.splitext(path)
         path_data = path_yaml[0].replace('tests', 'datas', 1)
         self.path = path_data

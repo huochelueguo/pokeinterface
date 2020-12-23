@@ -20,8 +20,10 @@ class Get(object):
 
     def __init__(self, url, params=None, header=None, verify=False):
         """
-        :param url:
-        :param params:
+        :param url: 请求地址
+        :param params: 请求参数
+        :param header: 请求头
+        :param verify: 忽略https
         """
         self.url = url
         self.params = params

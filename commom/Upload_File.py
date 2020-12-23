@@ -7,10 +7,7 @@
 # @Time:NAME.py@Time:2020/12/22 20:23
 # @ 上传文件通用接口
 # 参数qaz翻译：
-#     1： m4a
-#     2:  mp4
-#     3:  jpg
-#     4:  txt
+
 # """
 import requests
 from commom.Logs import Log
@@ -21,8 +18,23 @@ logger = log.Logger
 
 
 class Upload_File(object):
+    """
+    封装upload方法
+    """
 
     def __init__(self, url, header, qaz, data=None, files=None, **kwargs):
+        """
+        :param url: 请求地址
+        :param header: 请求头
+        :param qaz: upload文件类型
+                 1： m4a
+                 2:  mp4
+                 3:  jpg
+                 4:  txt
+        :param data: 请求数据
+        :param files: upload文件
+        :param kwargs: 其他requests参数，如params
+        """
         self.url = url
         self.header = header
         self.data = data
@@ -44,6 +56,9 @@ class Upload_File(object):
 
     # 外部只暴露upload方法，其他为私有方法
     def __upload_image(self):
+        """
+        :return: 返回response
+        """
         res = requests.post(url=self.url, headers=self.header, data=self.data, files=self.files, params=params, verify=False)
         return res.json()
 
