@@ -6,8 +6,6 @@
 # @File:Upload_File.py
 # @Time:NAME.py@Time:2020/12/22 20:23
 # @ 上传文件通用接口
-# 参数qaz翻译：
-
 # """
 import requests
 import time
