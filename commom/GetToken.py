@@ -19,7 +19,13 @@ logger = log.Logger
 class ReturnToken(Post):
 
     def __init__(self, url, header, data=None, json=None):
-        """调用父类构造方法"""
+        """
+        调用父类构造方法
+        :param url: 请求地址
+        :param header: 请求头
+        :param data: 请求数据，类型为application/x-www-form-urlencoded
+        :param json: 请求数据，类型为application/json
+        """
         super().__init__(url, header, data, json)
         self.url = url
         self.header = header
