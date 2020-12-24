@@ -5,6 +5,7 @@
 @Github:https://github.com/huochelueguo
 @File:Const.py
 @Time:2020/12/23 下午11:45
+@ 常量定义
 """
 import sys
 
